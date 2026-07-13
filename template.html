@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Larson Gallery — fourteen working apps, hung with care</title>
+<meta name="description" content="The complete collection of webapps built by Karmel Larson — for the piano shop, Momni, the family, the garden, and everything in between. Browse the walls, peek at what's on deck, and request an app of your own.">
+<link rel="apple-touch-icon" href="assets/icons/gallery.png">
+<link rel="icon" type="image/png" href="assets/icons/gallery.png">
+<style>
+/* ============================================================
+   THE LARSON GALLERY — warm plaster, wood & brass
+   ============================================================ */
+:root{
+  --wall:#EDE3D3; --wall-deep:#E4D7C2; --ink:#3D3428; --ink-soft:#7C6F5C;
+  --mat:#FFFDF6; --wood:#7C5B3E; --brass:#B99457; --brass-deep:#A88448;
+  --black:#2A2622; --paper:#FFFDF8; --accent:#A64B3C;
+  /* phase colors */
+  --ph-dreaming:#9B8CD9; --ph-sketching:#E5C17E; --ph-painting:#C77E6D;
+  --ph-retouching:#7FA3C4; --ph-hung:#7FA968; --ph-archived:#A6988A;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--wall); color:var(--ink);
+  font-family:Charter,Georgia,serif; line-height:1.55;
+  background-image:linear-gradient(rgba(255,255,255,.28),rgba(0,0,0,.035))}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brass); outline-offset:3px}
+img{display:block; max-width:100%}
+
+/* ---------- masthead ---------- */
+.masthead{text-align:center; padding:58px 24px 24px}
+.mast-est{font-family:"Avenir Next","Helvetica Neue",sans-serif; font-size:11px; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--ink-soft); margin:0 0 14px}
+.mast-title{font-family:Didot,"Bodoni 72",Georgia,serif; font-size:clamp(38px,6.5vw,64px);
+  font-weight:400; margin:0; letter-spacing:.05em; line-height:1.05}
+.mast-sub{font-style:italic; font-size:17px; color:var(--ink-soft); margin:12px 0 0}
+.mast-stats{font-family:"Avenir Next",sans-serif; font-size:11px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ink-soft); margin:18px 0 0}
+.mast-stats b{color:var(--ink); font-weight:600}
+.mast-rule{width:52px; height:2px; background:var(--brass); margin:24px auto 0}
+
+.nav{display:flex; justify-content:center; gap:6px 24px; flex-wrap:wrap; padding:20px 24px 6px;
+  font-family:"Avenir Next",sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase}
+.nav a{text-decoration:none; color:var(--ink-soft); padding:6px 2px; border-bottom:1px solid transparent}
+.nav a:hover{color:var(--ink); border-bottom-color:var(--brass)}
+
+/* ---------- phase legend ---------- */
+.legend{display:flex; justify-content:center; gap:8px 20px; flex-wrap:wrap; padding:16px 24px 0;
+  font-family:"Avenir Next",sans-serif; font-size:11px; color:var(--ink-soft)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{width:10px; height:10px; border-radius:50%; display:inline-block}
+
+/* ---------- badges & meters ---------- */
+.badge{display:inline-flex; align-items:center; gap:6px; font-family:"Avenir Next",sans-serif;
+  font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:600;
+  border:1px solid rgba(0,0,0,.14); border-radius:99px; padding:3px 10px; background:rgba(255,255,255,.55)}
+.badge i{width:8px; height:8px; border-radius:50%; display:inline-block; flex:none}
+.meter{height:7px; border-radius:4px; background:rgba(0,0,0,.1); overflow:hidden; margin-top:8px}
+.meter i{display:block; height:100%; border-radius:4px}
+
+/* ---------- section shells ---------- */
+.section{max-width:1140px; margin:0 auto; padding:44px 24px 12px}
+.plaque{width:max-content; max-width:90%; margin:38px auto 26px; padding:7px 26px;
+  background:linear-gradient(180deg,#C9A96E,var(--brass-deep)); color:#3A2E1A; border-radius:2px;
+  font-family:"Avenir Next",sans-serif; font-size:11px; letter-spacing:.3em; text-transform:uppercase;
+  font-weight:600; text-align:center; box-shadow:0 1px 4px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.4)}
+.section-head{text-align:center; margin:0 0 10px}
+.section-title{font-family:Didot,"Bodoni 72",Georgia,serif; font-size:clamp(26px,3.8vw,38px);
+  font-weight:400; margin:0; letter-spacing:.04em}
+.section-sub{font-style:italic; font-size:15px; color:var(--ink-soft); margin:8px auto 0; max-width:60ch}
+.section-divider{border:none; border-top:3px double #C7B79C; max-width:1100px; margin:54px auto 0}
+
+/* ---------- gallery walls: salon cluster pieces ---------- */
+.wall{display:flex; justify-content:center; gap:38px 30px; flex-wrap:wrap; align-items:flex-start; padding:6px 0 10px}
+.piece{width:300px; text-decoration:none; display:block; transition:transform .25s ease}
+.piece:hover{transform:translateY(-4px)}
+.fr{background:var(--mat); padding:11px; box-shadow:0 8px 20px rgba(60,45,25,.26)}
+.piece:hover .fr{box-shadow:0 14px 28px rgba(60,45,25,.32)}
+.fr.wood{border:6px solid var(--wood)}
+.fr.brass{border:5px solid var(--brass)}
+.fr.black{border:6px solid var(--black)}
+.fr img{aspect-ratio:16/10; object-fit:cover; object-position:top; width:100%; background:#F4F0E6}
+.lab{text-align:center; margin-top:11px}
+.lab b{display:block; font-size:14.5px; font-weight:600; font-family:"Avenir Next",sans-serif; letter-spacing:.02em}
+.lab i{font-size:12.5px; color:var(--ink-soft); display:block; margin:1px 0 6px}
+
+/* ---------- on deck / requested ---------- */
+.tinted{background:var(--wall-deep); padding:8px 0 50px; margin-top:54px;
+  border-top:3px double #C7B79C; border-bottom:3px double #C7B79C}
+.sketch-wall{display:flex; justify-content:center; gap:30px; flex-wrap:wrap; align-items:stretch;
+  max-width:1100px; margin:0 auto; padding:14px 24px 0}
+.sketch{width:250px; display:flex; flex-direction:column}
+.sk-fr{background:var(--paper); padding:12px; border:2px dashed #B4A488; box-shadow:0 5px 14px rgba(60,45,25,.14); flex:1}
+.sk-canvas{min-height:150px; height:100%; background:
+  linear-gradient(#F0E9DC 1px,transparent 1px),linear-gradient(90deg,#F0E9DC 1px,transparent 1px);
+  background-size:18px 18px; background-color:#FCFAF3;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; text-align:center; padding:14px}
+.sk-name{font-family:Noteworthy,"Bradley Hand",cursive; font-size:21px; color:#6B584C; font-weight:700}
+.sk-what{font-size:12.5px; font-style:italic; color:var(--ink-soft); max-width:24ch}
+.sk-lab{text-align:center; margin-top:10px; font-size:12px; font-style:italic; color:var(--ink-soft)}
+.queue-chip{display:inline-block; font-family:"Avenir Next",sans-serif; font-size:10px; font-weight:700;
+  letter-spacing:.1em; background:var(--ink); color:var(--mat); border-radius:99px; padding:3px 11px; margin-bottom:6px}
+.note-card{background:#FDF6D8; border:1px solid #E8D98F; box-shadow:0 5px 14px rgba(60,45,25,.16);
+  padding:18px 16px 14px; transform:rotate(-1deg); position:relative}
+.sketch:nth-child(2n) .note-card{transform:rotate(1.2deg)}
+.note-card::before{content:""; position:absolute; top:-8px; left:50%; transform:translateX(-50%) rotate(1deg);
+  width:54px; height:15px; background:rgba(216,190,160,.75)}
+.note-from{font-family:"Avenir Next",sans-serif; font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:#8A7A50; margin-top:8px}
+
+/* ---------- the queue ---------- */
+.queue-list{max-width:640px; margin:16px auto 0; display:flex; flex-direction:column; gap:10px; padding:0; list-style:none}
+.queue-row{display:flex; align-items:center; gap:14px; background:var(--paper); border:1px solid #E5DAC4;
+  border-radius:6px; padding:13px 18px; box-shadow:0 3px 10px rgba(60,45,25,.1)}
+.queue-num{font-family:Didot,"Bodoni 72",Georgia,serif; font-size:24px; color:var(--brass-deep); width:34px; flex:none; text-align:center}
+.queue-row b{font-family:"Avenir Next",sans-serif; font-size:14px; font-weight:600; display:block}
+.queue-row i{font-size:12.5px; color:var(--ink-soft)}
+.queue-row .badge{margin-left:auto; flex:none}
+.queue-note{text-align:center; font-style:italic; font-size:14px; color:var(--ink-soft); max-width:56ch; margin:18px auto 0}
+
+/* ---------- archived wing ---------- */
+.arch .fr img{filter:saturate(.45) sepia(.12) brightness(.97)}
+.arch .fr{border-color:#9A8E7C !important}
+.blank-canvas{aspect-ratio:16/10; background:#F6F1E6; border:1px solid #E0D6C2;
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:16px}
+.blank-canvas span{font-style:italic; font-size:13px; color:#A6988A}
+
+/* ---------- tally ---------- */
+.tally-card{max-width:520px; margin:18px auto 0; background:var(--paper); border-radius:6px;
+  box-shadow:0 8px 22px rgba(60,45,25,.18); padding:30px 34px 26px; border:1px solid #E5DAC4}
+.tally-title{font-family:Noteworthy,"Bradley Hand",cursive; font-size:24px; color:var(--accent);
+  margin:0 0 2px; font-weight:700; text-align:center}
+.tally-sub{font-family:"Avenir Next",sans-serif; font-size:10.5px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-soft); text-align:center; margin:0 0 18px}
+.tally-list{display:flex; flex-direction:column; gap:11px; margin:0; padding:0; list-style:none}
+.tally-row{display:flex; align-items:center; gap:12px; font-size:15px}
+.tally-swash{width:30px; height:14px; border-radius:3px; flex:none; transform:rotate(-2deg); opacity:.85}
+.tally-row b{font-weight:600; font-family:"Avenir Next",sans-serif; font-size:13.5px}
+.tally-dots{flex:1; border-bottom:1px dotted #C9BBA0; transform:translateY(-3px)}
+.tally-row span{color:var(--ink-soft); font-variant-numeric:tabular-nums; font-size:14px}
+.tally-total{margin-top:16px; padding-top:14px; border-top:2px solid var(--ink);
+  display:flex; justify-content:space-between; font-family:"Avenir Next",sans-serif; font-weight:600; font-size:14px}
+
+/* ---------- a–z ---------- */
+.az-wrap{max-width:880px; margin:20px auto 0}
+.az-grid{display:grid; grid-template-columns:1fr 1fr; gap:4px 52px}
+.az-row{display:flex; align-items:baseline; gap:9px; font-size:15px; padding:8px 0;
+  border-bottom:1px dotted #C9BBA0; text-decoration:none}
+.az-row:hover b{color:var(--accent)}
+.az-row b{font-weight:600; font-family:"Avenir Next",sans-serif; font-size:13.5px; white-space:nowrap}
+.az-row i{color:var(--ink-soft); font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.az-row span{margin-left:auto; font-family:"Avenir Next",sans-serif; font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--brass-deep); flex:none}
+
+/* ---------- forms ---------- */
+.formwrap{background:var(--wall-deep); margin-top:60px; padding:52px 24px 58px; border-top:3px double #C7B79C}
+.form-card{max-width:640px; margin:0 auto; background:var(--paper); border-radius:6px;
+  box-shadow:0 8px 22px rgba(60,45,25,.18); padding:36px 36px 34px; border:1px solid #E5DAC4}
+.form-orn{color:var(--accent); font-size:20px; margin:0 0 8px; text-align:center}
+.form-title{font-family:Didot,"Bodoni 72",Georgia,serif; font-size:29px; font-weight:400; margin:0 0 8px; text-align:center}
+.form-copy{font-size:14.5px; color:var(--ink-soft); margin:0 auto 22px; max-width:48ch; font-style:italic; text-align:center}
+.field{margin-bottom:14px}
+.field label{display:block; font-family:"Avenir Next",sans-serif; font-size:10.5px; letter-spacing:.16em;
+  text-transform:uppercase; font-weight:600; color:var(--ink-soft); margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%; border:1px solid #CBBFA5; border-radius:4px;
+  background:#FFFEFB; padding:10px 12px; font-family:Charter,Georgia,serif; font-size:15px; color:var(--ink)}
+.field textarea{min-height:96px; resize:vertical}
+.field-row{display:flex; gap:14px}
+.field-row .field{flex:1}
+.btn{display:inline-block; border:none; cursor:pointer; text-decoration:none; background:var(--ink); color:var(--mat);
+  font-family:"Avenir Next",sans-serif; font-size:11.5px; letter-spacing:.2em; text-transform:uppercase;
+  font-weight:600; padding:14px 32px; border-radius:2px; transition:background .2s ease}
+.btn:hover{background:var(--wood)}
+.form-alt{font-size:13px; color:var(--ink-soft); margin:16px 0 0; text-align:center}
+.form-alt a{color:var(--brass-deep)}
+
+/* ---------- phones & install ---------- */
+.phone{width:168px; flex:none; border-radius:26px; border:7px solid #2A2622; background:#111;
+  box-shadow:0 10px 22px rgba(60,45,25,.3); overflow:hidden}
+.phone img{aspect-ratio:390/780; object-fit:cover; object-position:top; width:100%; background:#F4F0E6; border-radius:16px}
+.phone-row{display:flex; gap:20px; justify-content:center; flex-wrap:wrap}
+.install{display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap}
+.install-icon{width:76px; height:76px; border-radius:17px; box-shadow:0 4px 12px rgba(60,45,25,.28); flex:none}
+.install ol{margin:0; padding-left:20px; font-size:14.5px; line-height:1.7}
+.install-note{font-size:12.5px; font-style:italic; color:var(--ink-soft); margin:10px 0 0}
+.chips{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0 0}
+.chipbtn{font-family:"Avenir Next",sans-serif; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+  font-weight:600; border:1.5px solid var(--brass-deep); color:var(--brass-deep); background:transparent;
+  border-radius:99px; padding:8px 16px; cursor:pointer; transition:all .15s}
+.chipbtn:hover{background:var(--brass-deep); color:var(--mat)}
+
+/* ---------- detail page ---------- */
+#detail{display:none}
+body.viewing #home{display:none}
+body.viewing #detail{display:block}
+.d-top{max-width:1000px; margin:0 auto; padding:34px 24px 0}
+.d-back{font-family:"Avenir Next",sans-serif; font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  text-decoration:none; color:var(--ink-soft)}
+.d-back:hover{color:var(--ink)}
+.d-head{text-align:center; padding:18px 24px 8px}
+.d-cat{font-family:"Avenir Next",sans-serif; font-size:10.5px; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--brass-deep); font-weight:600; margin:0 0 10px}
+.d-title{font-family:Didot,"Bodoni 72",Georgia,serif; font-size:clamp(32px,5vw,50px); font-weight:400; margin:0}
+.d-tag{font-style:italic; font-size:16px; color:var(--ink-soft); margin:8px 0 0}
+.d-body{max-width:1000px; margin:0 auto; padding:22px 24px 40px; display:flex; gap:36px; align-items:flex-start}
+.d-gallery{flex:1.5; min-width:0}
+.d-mainfr{background:var(--mat); padding:14px; border:7px solid var(--wood); box-shadow:0 12px 28px rgba(60,45,25,.3)}
+.d-mainfr img{width:100%; aspect-ratio:16/10; object-fit:contain; background:#F4F0E6}
+.d-thumbs{display:flex; gap:10px; margin-top:12px}
+.d-thumb{flex:1; background:var(--mat); padding:5px; border:2px solid #C9BBA0; cursor:pointer;
+  box-shadow:0 3px 8px rgba(60,45,25,.18); transition:transform .15s ease}
+.d-thumb:hover{transform:translateY(-2px)}
+.d-thumb.active{border-color:var(--brass-deep)}
+.d-thumb img{aspect-ratio:16/10; object-fit:cover; object-position:top; width:100%; background:#F4F0E6}
+.d-side{flex:1; min-width:280px}
+.d-card{background:var(--paper); border:1px solid #E5DAC4; border-radius:6px; padding:22px 24px; margin-bottom:18px;
+  box-shadow:0 5px 14px rgba(60,45,25,.12)}
+.d-card h3{font-family:"Avenir Next",sans-serif; font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--ink-soft); margin:0 0 12px; font-weight:600}
+.d-facts{display:flex; flex-direction:column; gap:8px; font-size:14px}
+.d-facts div{display:flex; justify-content:space-between; gap:12px}
+.d-facts dt{color:var(--ink-soft); font-family:"Avenir Next",sans-serif; font-size:12px}
+.d-facts dd{margin:0; text-align:right}
+.d-links{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+.d-link{font-family:"Avenir Next",sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:600; text-decoration:none; border:1.5px solid var(--ink); border-radius:2px; padding:9px 16px}
+.d-link:hover{background:var(--ink); color:var(--mat)}
+.d-link.gold{border-color:var(--brass-deep); color:var(--brass-deep)}
+.d-link.gold:hover{background:var(--brass-deep); color:var(--mat)}
+.d-story{font-size:15px; line-height:1.65}
+.d-pct{font-family:Didot,"Bodoni 72",Georgia,serif; font-size:30px; margin-left:auto}
+.d-phase-row{display:flex; align-items:center; gap:10px}
+
+/* ---------- footer ---------- */
+.footer{text-align:center; padding:44px 24px 56px; font-size:13px; color:var(--ink-soft); font-style:italic}
+.footer b{font-style:normal; font-family:"Avenir Next",sans-serif; font-weight:600; font-size:12px;
+  letter-spacing:.16em; text-transform:uppercase; display:block; margin-bottom:6px; color:var(--ink)}
+
+@media (max-width:800px){
+  .piece{width:44%} .sketch{width:46%}
+  .az-grid{grid-template-columns:1fr}
+  .d-body{flex-direction:column}
+  .field-row{flex-direction:column; gap:0}
+}
+@media (max-width:500px){
+  .piece,.sketch{width:100%; max-width:340px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *{transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HOME ================= -->
+<div id="home">
+
+<header class="masthead">
+  <p class="mast-est">Est. 2026 · Utah County</p>
+  <h1 class="mast-title">The Larson Gallery</h1>
+  <p class="mast-sub">fourteen working apps, hung with care — built by mama</p>
+  <p class="mast-stats"><b>14</b> hung &amp; in progress · <b>3</b> on deck · <b>2</b> requested · <b>3</b> archived</p>
+  <div class="mast-rule"></div>
+</header>
+
+<nav class="nav" aria-label="Site sections">
+  <a href="#collection">The Collection</a>
+  <a href="#ondeck">On Deck</a>
+  <a href="#requested">Requested</a>
+  <a href="#queue">The Queue</a>
+  <a href="#archived">Archived</a>
+  <a href="#tally">The Tally</a>
+  <a href="#complete">A–Z</a>
+  <a href="#request">Request an App</a>
+</nav>
+
+<div class="legend" aria-label="Phase legend">
+  <span><i style="background:var(--ph-dreaming)"></i>Dreaming</span>
+  <span><i style="background:var(--ph-sketching)"></i>Sketching</span>
+  <span><i style="background:var(--ph-painting)"></i>Painting</span>
+  <span><i style="background:var(--ph-retouching)"></i>Retouching</span>
+  <span><i style="background:var(--ph-hung)"></i>Hung</span>
+  <span><i style="background:var(--ph-archived)"></i>Archived</span>
+</div>
+
+<main id="collection" class="section">
+  <!-- walls are rendered by JS from APPS data -->
+  <div id="walls"></div>
+</main>
+
+<!-- ================= ON DECK ================= -->
+<section id="ondeck" class="tinted">
+  <div class="section" style="padding-top:38px">
+    <div class="section-head">
+      <h2 class="section-title">On Deck — The App Planner</h2>
+      <p class="section-sub">Karmel's next canvases — sketched, queued, and waiting for the easel.</p>
+    </div>
+  </div>
+  <!-- EDIT ME: replace these with your real planned apps -->
+  <div class="sketch-wall">
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #1</span></span>
+      <div class="sk-fr"><div class="sk-canvas">
+        <span class="sk-name">Lesson Studio</span>
+        <span class="sk-what">piano lesson scheduling for the shop</span>
+        <span class="badge"><i style="background:var(--ph-sketching)"></i>Sketching · 20%</span>
+      </div></div>
+      <p class="sk-lab">next on the easel</p>
+    </div>
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #2</span></span>
+      <div class="sk-fr"><div class="sk-canvas">
+        <span class="sk-name">Recipe Box</span>
+        <span class="sk-what">the family recipes, finally in one place</span>
+        <span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming · 5%</span>
+      </div></div>
+      <p class="sk-lab">penciled in</p>
+    </div>
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #3</span></span>
+      <div class="sk-fr"><div class="sk-canvas">
+        <span class="sk-name">Holiday HQ</span>
+        <span class="sk-what">gifts, cards &amp; the christmas list</span>
+        <span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming · 5%</span>
+      </div></div>
+      <p class="sk-lab">penciled in</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REQUESTED ================= -->
+<section id="requested" class="section">
+  <div class="section-head">
+    <h2 class="section-title">Requested</h2>
+    <p class="section-sub">other people's wishes, pinned to the studio wall — add yours below.</p>
+  </div>
+  <!-- EDIT ME: sample requests — real ones arrive via the form -->
+  <div class="sketch-wall">
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #4</span></span>
+      <div class="note-card">
+        <span class="sk-name" style="font-size:19px">Practice Tracker</span>
+        <p class="sk-what" style="margin:6px 0 0">stickers &amp; streaks for piano practice minutes</p>
+        <p class="note-from">requested by a piano parent</p>
+      </div>
+    </div>
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #5</span></span>
+      <div class="note-card">
+        <span class="sk-name" style="font-size:19px">Book Swap</span>
+        <p class="sk-what" style="margin:6px 0 0">a neighborhood lending library, online</p>
+        <p class="note-from">requested by a neighbor</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE QUEUE ================= -->
+<section id="queue" class="section">
+  <div class="section-head">
+    <h2 class="section-title">The Queue</h2>
+    <p class="section-sub">what gets painted next, in order. request a spot — and say where you'd like to land.</p>
+  </div>
+  <ol class="queue-list">
+    <li class="queue-row"><span class="queue-num">1</span><div><b>Lesson Studio</b><i>Karmel's pick — piano lessons for the shop</i></div><span class="badge"><i style="background:var(--ph-sketching)"></i>Sketching</span></li>
+    <li class="queue-row"><span class="queue-num">2</span><div><b>Recipe Box</b><i>Karmel's pick — the family cookbook</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">3</span><div><b>Holiday HQ</b><i>Karmel's pick — gifts &amp; cards</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">4</span><div><b>Practice Tracker</b><i>requested by a piano parent</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">5</span><div><b>Book Swap</b><i>requested by a neighbor</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+  </ol>
+  <p class="queue-note">Five in line today. When you <a href="#request">request an app</a>, tell me where you hope it lands — front of the line, "whenever," or somewhere in between — and I'll do my honest best.</p>
+</section>
+
+<hr class="section-divider">
+
+<!-- ================= ARCHIVED ================= -->
+<section id="archived" class="section arch">
+  <div class="section-head">
+    <h2 class="section-title">The Archive Wing</h2>
+    <p class="section-sub">retired with honor — early works and canvases that never met a brush.</p>
+  </div>
+  <div class="wall">
+    <a class="piece" href="#/app/choreapp" style="width:270px">
+      <div class="fr wood"><img data-shot="choreapp-main" alt="Teamwork Chores screenshot" loading="lazy"></div>
+      <div class="lab"><b>Teamwork Chores</b><i>the original chore app — superseded by v2</i>
+      <span class="badge"><i style="background:var(--ph-archived)"></i>Archived</span></div>
+    </a>
+    <div class="piece" style="width:270px; cursor:default">
+      <div class="fr brass"><div class="blank-canvas"><span>momniapp —<br>a canvas stretched, never painted</span></div></div>
+      <div class="lab"><b>Momni App</b><i>reserved for a future chapter</i>
+      <span class="badge"><i style="background:var(--ph-archived)"></i>Archived</span></div>
+    </div>
+    <div class="piece" style="width:270px; cursor:default">
+      <div class="fr brass"><div class="blank-canvas"><span>FitnessApp —<br>a canvas stretched, never painted</span></div></div>
+      <div class="lab"><b>Fitness App</b><i>the idea went to LightenUP instead</i>
+      <span class="badge"><i style="background:var(--ph-archived)"></i>Archived</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE TALLY ================= -->
+<section id="tally" class="section">
+  <div class="section-head">
+    <h2 class="section-title">The Tally</h2>
+    <p class="section-sub">the collection, counted by category</p>
+  </div>
+  <div class="tally-card">
+    <p class="tally-title">the app tally ✿</p>
+    <p class="tally-sub">2026 edition</p>
+    <ul class="tally-list">
+      <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>4 hung</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#E4756B"></span><b>Momni</b><span class="tally-dots"></span><span>3 hung</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>1 hung · 1 archived</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>1 hung</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>1 hung</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>1 hung</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#A6988A"></span><b>Hobby Apps</b><span class="tally-dots"></span><span>2 hung</span></li>
+    </ul>
+    <div class="tally-total"><span>The whole wall</span><span>14 hung · 3 on deck · 2 requested</span></div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ================= A–Z ================= -->
+<section id="complete" class="section">
+  <div class="section-head">
+    <h2 class="section-title">The Complete Collection</h2>
+    <p class="section-sub">every app, alphabetical &amp; linked</p>
+  </div>
+  <div class="az-wrap"><div class="az-grid" id="azgrid"></div></div>
+</section>
+
+<!-- ================= REQUEST AN APP ================= -->
+<section id="request" class="formwrap">
+  <div class="form-card">
+    <p class="form-orn">❧</p>
+    <h2 class="form-title">Request an App</h2>
+    <p class="form-copy">Wish an app existed for your shop, your family, or your thing? Share the vision — the best requests get a sticky note on the studio wall and a spot in the queue.</p>
+    <form name="app-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="#request">
+      <input type="hidden" name="form-name" value="app-request">
+      <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <div class="field-row">
+        <div class="field"><label for="rq-name">Your name</label><input id="rq-name" name="name" required></div>
+        <div class="field"><label for="rq-email">Email</label><input id="rq-email" name="email" type="email" required></div>
+      </div>
+      <div class="field"><label for="rq-app">What should it be called?</label><input id="rq-app" name="app-name" placeholder="e.g. Practice Tracker"></div>
+      <div class="field"><label for="rq-vision">Share your vision</label><textarea id="rq-vision" name="vision" required placeholder="What should it do? Who is it for? What would make it wonderful?"></textarea></div>
+      <div class="field-row">
+        <div class="field"><label for="rq-cat">Category</label>
+          <select id="rq-cat" name="category">
+            <option>Family</option><option>Personal</option><option>Finance</option>
+            <option>Hobby</option><option>Project</option><option>Business</option><option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label for="rq-queue">Where in the queue?</label>
+          <select id="rq-queue" name="queue-hope">
+            <option>Whenever you get to it</option><option>Sometime this year</option>
+            <option>Next few months</option><option>Front of the line, please!</option>
+          </select>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:8px"><button class="btn" type="submit">Pin It to the Wall</button></div>
+    </form>
+    <p class="form-alt">or email <a href="mailto:karmel@brighamlarsonpianos.com">karmel@brighamlarsonpianos.com</a></p>
+  </div>
+</section>
+
+<footer class="footer">
+  <b>The Larson Gallery</b>
+  software for the shop, the fam, the garden &amp; me — built by Karmel Larson
+</footer>
+
+</div><!-- /home -->
+
+<!-- ================= DETAIL VIEW (rendered by JS) ================= -->
+<div id="detail"></div>
+
+<!-- hidden static form definition so Netlify registers the per-app feedback form -->
+<form name="app-feedback" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="app-feedback">
+  <input name="bot-field"><input name="app"><input name="type"><input name="name">
+  <input name="email" type="email"><textarea name="message"></textarea>
+</form>
+
+<script>
+/* ============ screenshots & icons (injected at build time) ============ */
+const SCREENS = __SCREENS_JSON__;
+const ICONS = __ICONS_JSON__;
+
+/* ============ phase system ============ */
+const PHASES = {
+  dreaming:   {word:"Dreaming",   color:"var(--ph-dreaming)"},
+  sketching:  {word:"Sketching",  color:"var(--ph-sketching)"},
+  painting:   {word:"Painting",   color:"var(--ph-painting)"},
+  retouching: {word:"Retouching", color:"var(--ph-retouching)"},
+  hung:       {word:"Hung",       color:"var(--ph-hung)"},
+  archived:   {word:"Archived",   color:"var(--ph-archived)"},
+};
+
+/* ============ the collection ============ */
+const APPS = [
+  {id:"pianolog", name:"Piano Log", cat:"BLP Apps", frame:"wood", big:true,
+   tag:"the showroom floor, inventoried", phase:"hung", pct:100,
+   stack:"HTML · Google Sheets sync", born:"2026",
+   github:"https://github.com/karmel-spec/pianolog", live:"",
+   story:"Every piano at Brigham Larson Pianos, accounted for. Piano Log reads straight from the shop's inventory sheet, so the team can search by make, serial, section, or owner and always trust what they see. It was the first BLP tool to get real branding — and it set the bar for everything after."},
+  {id:"salesapp2", name:"Sales Console", cat:"BLP Apps", frame:"brass",
+   tag:"leads logged, follow-ups drafted", phase:"retouching", pct:85,
+   stack:"TypeScript · Leads Log sheet · Arnold drafts", born:"2026",
+   github:"https://github.com/karmel-spec/salesapp2", live:"",
+   story:"The newest BLP tool: a console where the Leads Log sheet is the source of truth and follow-up drafts are ready before you ask. It's in retouching now — final wiring before it earns its spot on the sales desk."},
+  {id:"blpops", name:"BLP Operations", cat:"BLP Apps", frame:"black",
+   tag:"33 modules under one roof", phase:"retouching", pct:90,
+   stack:"HTML · Netlify · Sheets sync", born:"2026",
+   github:"https://github.com/karmel-spec/BLPOperationsWebApp", live:"",
+   story:"The mega-app: a sales console plus thirty-three working modules — tuning CRM, marketing, onboarding, org charts, and more — all under one roof. It's the busiest wall in the gallery, and it's getting a careful audit pass right now."},
+  {id:"pricetags", name:"Price Tag Maker", cat:"BLP Apps", frame:"wood",
+   tag:"print-ready showroom tags", phase:"hung", pct:100,
+   stack:"HTML · print CSS · QR codes", born:"2026",
+   github:"https://github.com/karmel-spec/pricetags", live:"",
+   story:"Walk the floor, photograph a serial number, fill in the worksheet, print the official tag — QR code, monthly finance payment, and all. A small tool that saves the showroom team real time every single week."},
+  {id:"momni", name:"Momni", cat:"Momni", frame:"brass", big:true,
+   tag:"caresharing, mom to mom — now in beta", phase:"retouching", pct:90,
+   stack:"HTML · beta gate", born:"2026",
+   github:"https://github.com/karmel-spec/momni", live:"",
+   story:"Momni is Karmel's founding work: a community of Momnis sharing care, mom to mom — for right now, date night, regular mornings, overnights, and everything in between. Circle up. Link together. The site is in beta behind a gate, being polished for the world."},
+  {id:"momnif", name:"Momni Foundation", cat:"Momni", frame:"wood",
+   tag:"hour for hour, mother to mother", phase:"hung", pct:100,
+   stack:"HTML · 501(c)(3)", born:"2026",
+   github:"https://github.com/karmel-spec/momnifoundation", live:"",
+   story:"The giving arm of Momni: a 501(c)(3) where every hour of care shared in the community helps fund an hour of care for a family in need. The site tells that story — hour for hour, mother to mother."},
+  {id:"karmel", name:"karmellarson.com", cat:"Momni", frame:"wood",
+   tag:"mama karmel — founder & author", phase:"hung", pct:100,
+   stack:"HTML · Editorial Ivory design", born:"2026",
+   github:"https://github.com/karmel-spec/karmellarson", live:"",
+   story:"The founder site: Mama Karmel, founder of Momni and author of Circle Up. A single quiet page in Editorial Ivory that introduces the person behind everything else on this wall."},
+  {id:"famchores", name:"Family Chores", cat:"Family Apps", frame:"black", big:true,
+   tag:"the command center, v2", phase:"hung", pct:100,
+   stack:"Next.js · SQLite · Railway", born:"2026",
+   github:"https://github.com/karmel-spec/FamChoresV2", live:"",
+   story:"Chores rotate among the kids each day, balanced by time and difficulty, with a parent admin backend and per-child dashboards. Version two of the chore experiment — the one that finally ended the chore wars. Deployed and in daily use."},
+  {id:"starlar", name:"Starlar", cat:"Finance Apps", frame:"brass",
+   tag:"the family book, kept private", phase:"hung", pct:100,
+   stack:"Next.js · private repo", born:"2026",
+   github:"https://github.com/karmel-spec/starlar", live:"",
+   story:"The Starkey–Larson family register: income, partnership, meetings, tasks, banking — the family book, in Family Ledger green and gold. It's the one piece in the gallery kept behind glass: the repo is private and the register opens with a family password."},
+  {id:"lightenup", name:"LightenUP", cat:"Personal Apps", frame:"brass",
+   tag:"the lighter path, tracked kindly", phase:"hung", pct:100,
+   stack:"single-file HTML · prism branding", born:"2026",
+   github:"https://github.com/karmel-spec/lightenup", live:"",
+   story:"A weight-cut tracker with guardrails built in on purpose — safety caps, steady pace, kind numbers. One single file, prism-bright, made for the long game rather than the crash."},
+  {id:"babyshower", name:"The Story Garden", cat:"Project Apps", frame:"wood",
+   tag:"for Baby White, arriving October 14", phase:"hung", pct:100,
+   stack:"HTML · multi-page storybook", born:"2026",
+   github:"https://github.com/karmel-spec/myleswhitebabyshower", live:"",
+   story:"A baby shower as a storybook: blue gingham, terracotta pots, string lights at dusk, and a library that grows one gift at a time. Each chapter is its own page — the particulars, the story so far, the growing tracker, the games. Shower's August 15th, in Grandma's garden."},
+  {id:"greenhouse", name:"Garden OS", cat:"Hobby Apps", frame:"black", big:true,
+   tag:"the greenhouse brain, growing", phase:"retouching", pct:80,
+   stack:"Next.js · Supabase · Netlify", born:"2026",
+   github:"https://github.com/karmel-spec/Greenhouse", live:"",
+   story:"Beds, sowings, seasons, and sections — the greenhouse, systematized. Garden OS is the most actively growing piece in the gallery (fitting), with new sections still being planted every week."},
+  {id:"tamedog", name:"Tame Dog", cat:"Hobby Apps", frame:"black",
+   tag:"the band site, pre-launch", phase:"retouching", pct:75,
+   stack:"HTML · garage-poster style", born:"2026",
+   github:"https://github.com/karmel-spec/tamedog", live:"",
+   story:"Music, shows, merch, and a photo gallery in full Garage Poster style — loud on purpose. The launch checklist is nearly done; then the amps go up."},
+  {id:"choreapp", name:"Teamwork Chores", cat:"Family Apps", frame:"wood", archived:true,
+   tag:"the original — retired with honor", phase:"archived", pct:100,
+   stack:"HTML prototype · Netlify", born:"2026",
+   github:"https://github.com/karmel-spec/ChoreApp", live:"",
+   story:"The first swing at the chore problem: a responsive static prototype with dashboards, design studies, and a beta-testing guide. Everything learned here became Family Chores v2 — which is exactly what a good first version is for."},
+];
+
+const CATS = ["BLP Apps","Momni","Family Apps","Finance Apps","Personal Apps","Project Apps","Hobby Apps"];
+
+/* ============ render: walls ============ */
+function badge(app){
+  const p = PHASES[app.phase];
+  const pct = app.phase === "hung" ? "100%" : app.phase === "archived" ? "" : app.pct + "%";
+  return `<span class="badge"><i style="background:${p.color}"></i>${p.word}${pct ? " · " + pct : ""}</span>`;
+}
+function pieceHTML(app){
+  return `<a class="piece" href="#/app/${app.id}">
+    <div class="fr ${app.frame}"><img data-shot="${app.id}-main" alt="${app.name} screenshot" loading="lazy"></div>
+    <div class="lab"><b>${app.name}</b><i>${app.tag}</i>${badge(app)}</div>
+  </a>`;
+}
+function renderWalls(){
+  const host = document.getElementById("walls");
+  host.innerHTML = CATS.map(cat => {
+    const pieces = APPS.filter(a => a.cat === cat && !a.archived);
+    if(!pieces.length) return "";
+    return `<div class="plaque">${cat}</div><div class="wall">${pieces.map(pieceHTML).join("")}</div>`;
+  }).join("");
+}
+
+/* ============ render: a–z ============ */
+function renderAZ(){
+  const sorted = [...APPS].sort((a,b) =>
+    a.name.replace(/^The /,"").localeCompare(b.name.replace(/^The /,"")));
+  document.getElementById("azgrid").innerHTML = sorted.map(a =>
+    `<a class="az-row" href="#/app/${a.id}"><b>${a.name}</b><i>— ${a.tag}</i><span>${a.cat.replace(" Apps","")}</span></a>`
+  ).join("");
+}
+
+/* ============ render: detail ============ */
+function renderDetail(id){
+  const app = APPS.find(a => a.id === id);
+  if(!app){ location.hash = ""; return; }
+  const p = PHASES[app.phase];
+  const shots = [app.id + "-main", ...["-d1","-d2","-d3","-d4"].map(s => app.id + s)].filter(k => SCREENS[k]);
+  const mobiles = ["-m1","-m2"].map(s => app.id + s).filter(k => SCREENS[k]);
+  document.getElementById("detail").innerHTML = `
+    <div class="d-top"><a class="d-back" href="#collection">← back to the gallery</a></div>
+    <header class="d-head">
+      <p class="d-cat">${app.cat}</p>
+      <h1 class="d-title">${app.name}</h1>
+      <p class="d-tag">${app.tag}</p>
+      <div class="chips">
+        <button class="chipbtn" data-type="Report a bug">Report a Bug</button>
+        <button class="chipbtn" data-type="Request a feature">Request a Feature</button>
+        <button class="chipbtn" data-type="Suggest a change">Suggest a Change</button>
+        <button class="chipbtn" data-type="Leave a love note">Leave a Love Note</button>
+      </div>
+    </header>
+    <div class="d-body">
+      <div class="d-gallery">
+        <div class="d-mainfr"><img id="d-mainimg" src="${SCREENS[shots[0]] || ""}" alt="${app.name} — main view"></div>
+        <div class="d-thumbs">
+          ${shots.map((k,i) => `<span class="d-thumb${i===0?" active":""}" data-k="${k}" role="button" tabindex="0" aria-label="View screenshot ${i+1}">
+            <img src="${SCREENS[k] || ""}" alt=""></span>`).join("")}
+        </div>
+      </div>
+      <div class="d-side">
+        <div class="d-card">
+          <h3>Where It Stands</h3>
+          <div class="d-phase-row">${badge(app)}<span class="d-pct">${app.phase==="archived" ? "—" : app.pct + "%"}</span></div>
+          <div class="meter"><i style="width:${app.pct}%; background:${p.color}"></i></div>
+        </div>
+        <div class="d-card">
+          <h3>The Particulars</h3>
+          <dl class="d-facts">
+            <div><dt>Category</dt><dd>${app.cat}</dd></div>
+            <div><dt>Medium</dt><dd>${app.stack}</dd></div>
+            <div><dt>Born</dt><dd>${app.born}</dd></div>
+          </dl>
+          <div class="d-links">
+            ${app.live ? `<a class="d-link gold" href="${app.live}">Visit the App</a>` : ""}
+            <a class="d-link" href="${app.github}">View on GitHub</a>
+          </div>
+        </div>
+        <div class="d-card">
+          <h3>Artist's Notes</h3>
+          <p class="d-story">${app.story}</p>
+        </div>
+      </div>
+    </div>
+    ${mobiles.length ? `
+    <div class="d-body" style="padding-top:0">
+      <div class="d-card" style="flex:1">
+        <h3>On the Phone</h3>
+        <div class="phone-row">
+          ${mobiles.map(k => `<span class="phone"><img src="${SCREENS[k]}" alt="${app.name} on mobile"></span>`).join("")}
+        </div>
+      </div>
+      <div class="d-card" style="flex:1.2">
+        <h3>Put ${app.name} on Your Home Screen</h3>
+        <div class="install">
+          <img class="install-icon" src="${ICONS[app.id] || ""}" alt="${app.name} home screen icon">
+          <div>
+            <ol>
+              <li>Open the app in <b>Safari</b> on your iPhone</li>
+              <li>Tap the <b>Share</b> button (the square with the arrow)</li>
+              <li>Scroll down and tap <b>“Add to Home Screen”</b></li>
+              <li>Tap <b>Add</b> — it now opens like a real app</li>
+            </ol>
+            <p class="install-note">On Android: open in Chrome, tap ⋮, then “Add to Home screen.”</p>
+          </div>
+        </div>
+      </div>
+    </div>` : ""}
+    <section class="formwrap" style="margin-top:20px">
+      <div class="form-card">
+        <p class="form-orn">✎</p>
+        <h2 class="form-title">Leave a Note About ${app.name}</h2>
+        <p class="form-copy">Found a bug? Have an idea? Just want to say it made your day? Every note lands in Karmel's inbox.</p>
+        <form name="app-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="#/app/${app.id}">
+          <input type="hidden" name="form-name" value="app-feedback">
+          <input type="hidden" name="app" value="${app.name}">
+          <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="field"><label for="fb-type">What kind of note?</label>
+            <select id="fb-type" name="type">
+              <option>Suggest a change</option>
+              <option>Report a bug</option>
+              <option>Request a feature</option>
+              <option>Ask a question</option>
+              <option>Share how you use it</option>
+              <option>Leave a love note</option>
+            </select>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="fb-name">Your name</label><input id="fb-name" name="name" required></div>
+            <div class="field"><label for="fb-email">Email</label><input id="fb-email" name="email" type="email" required></div>
+          </div>
+          <div class="field"><label for="fb-msg">The note</label><textarea id="fb-msg" name="message" required></textarea></div>
+          <div style="text-align:center; margin-top:8px"><button class="btn" type="submit">Send the Note</button></div>
+        </form>
+      </div>
+    </section>
+    <footer class="footer"><b>The Larson Gallery</b>software for the shop, the fam, the garden &amp; me</footer>`;
+  // thumb swap
+  document.querySelectorAll(".d-thumb").forEach(t => {
+    const go = () => {
+      document.getElementById("d-mainimg").src = SCREENS[t.dataset.k] || "";
+      document.querySelectorAll(".d-thumb").forEach(x => x.classList.remove("active"));
+      t.classList.add("active");
+    };
+    t.addEventListener("click", go);
+    t.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); } });
+  });
+  // quick-action chips: preselect the note type and jump to the form
+  document.querySelectorAll(".chipbtn").forEach(c => {
+    c.addEventListener("click", () => {
+      const sel = document.getElementById("fb-type");
+      if(sel) sel.value = c.dataset.type;
+      document.getElementById("fb-msg")?.scrollIntoView({behavior:"smooth", block:"center"});
+      document.getElementById("fb-name")?.focus({preventScroll:true});
+    });
+  });
+  window.scrollTo(0, 0);
+}
+
+/* ============ router ============ */
+function route(){
+  const m = location.hash.match(/^#\/app\/([a-z0-9]+)$/);
+  if(m){ document.body.classList.add("viewing"); renderDetail(m[1]); }
+  else { document.body.classList.remove("viewing"); }
+}
+window.addEventListener("hashchange", route);
+
+/* ============ boot ============ */
+renderWalls();
+renderAZ();
+document.querySelectorAll("img[data-shot]").forEach(img => {
+  const k = img.dataset.shot;
+  if(SCREENS[k]) img.src = SCREENS[k];
+});
+route();
+</script>
+</body>
+</html>

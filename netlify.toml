@@ -1,0 +1,4 @@
+# Netlify config — static site, no build step needed
+# (index.html is pre-built; run `python3 build.py` locally after changing template.html or screenshots)
+[build]
+  publish = "."
