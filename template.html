@@ -218,11 +218,20 @@ img{display:block; max-width:100%}
   font-weight:600; border:1.5px solid var(--brass-deep); color:var(--brass-deep); background:transparent;
   border-radius:99px; padding:8px 16px; cursor:pointer; transition:all .15s}
 .chipbtn:hover{background:var(--brass-deep); color:var(--mat)}
-.use-btn{display:inline-block; text-decoration:none; font-family:"Avenir Next",sans-serif; font-size:12px;
-  letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:#3A2E1A;
-  background:linear-gradient(180deg,#C9A96E,var(--brass-deep)); padding:14px 32px; border-radius:2px;
-  box-shadow:0 2px 6px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.4); margin-top:16px}
+.d-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:16px}
+.use-btn,.share-btn{display:inline-block; text-decoration:none; font-family:"Avenir Next",sans-serif; font-size:12px;
+  letter-spacing:.18em; text-transform:uppercase; font-weight:600; padding:14px 32px; border-radius:2px; cursor:pointer}
+.use-btn{color:#3A2E1A; border:none;
+  background:linear-gradient(180deg,#C9A96E,var(--brass-deep));
+  box-shadow:0 2px 6px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.4)}
 .use-btn:hover{filter:brightness(1.08)}
+.share-btn{color:var(--ink); background:var(--paper); border:1.5px solid var(--brass-deep)}
+.share-btn:hover{background:var(--brass-deep); color:var(--mat)}
+.toast{position:fixed; left:50%; bottom:32px; transform:translateX(-50%) translateY(20px);
+  background:var(--ink); color:var(--mat); font-family:"Avenir Next",sans-serif; font-size:13px;
+  padding:12px 22px; border-radius:99px; box-shadow:0 6px 18px rgba(0,0,0,.3); opacity:0;
+  pointer-events:none; transition:opacity .2s, transform .2s; z-index:100}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 
 /* ---------- detail page ---------- */
 #detail{display:none}
@@ -682,7 +691,10 @@ function renderDetail(id){
         <button class="chipbtn" data-type="Suggest a change">Suggest a Change</button>
         <button class="chipbtn" data-type="Leave a note">Leave a Note</button>
       </div>
-      <a class="use-btn" href="${app.live || app.github}">Use ${app.name} Online →</a>
+      <div class="d-actions">
+        <a class="use-btn" href="${app.live || app.github}">Use ${app.name} Online →</a>
+        <button class="share-btn" id="share-btn">Share This App ↗</button>
+      </div>
     </header>
     <div class="d-body">
       <div class="d-gallery">
@@ -779,6 +791,19 @@ function renderDetail(id){
     t.addEventListener("click", go);
     t.addEventListener("keydown", e => { if(e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); } });
   });
+  // share this app: native share sheet on mobile (→ Messages/text), copy-link fallback.
+  // Shares the per-app share page (/a/<id>/) so the texted link unfurls with THIS app's image.
+  const shareBtn = document.getElementById("share-btn");
+  shareBtn?.addEventListener("click", async () => {
+    const shareUrl = location.origin + "/a/" + app.id + "/";
+    const data = { title: app.name + " — The Gallery", text: app.name + " — " + app.tag, url: shareUrl };
+    if(navigator.share){
+      try { await navigator.share(data); } catch(e){ /* user cancelled */ }
+    } else {
+      try { await navigator.clipboard.writeText(shareUrl); showToast("Link copied — paste it into a text!"); }
+      catch(e){ showToast(shareUrl); }
+    }
+  });
   // quick-action chips: preselect the note type and jump to the form
   document.querySelectorAll(".chipbtn").forEach(c => {
     c.addEventListener("click", () => {
@@ -789,6 +814,17 @@ function renderDetail(id){
     });
   });
   window.scrollTo(0, 0);
+}
+
+/* ============ toast ============ */
+let toastTimer;
+function showToast(msg){
+  let t = document.getElementById("toast");
+  if(!t){ t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
 }
 
 /* ============ router ============ */
