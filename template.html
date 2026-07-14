@@ -218,6 +218,11 @@ img{display:block; max-width:100%}
   font-weight:600; border:1.5px solid var(--brass-deep); color:var(--brass-deep); background:transparent;
   border-radius:99px; padding:8px 16px; cursor:pointer; transition:all .15s}
 .chipbtn:hover{background:var(--brass-deep); color:var(--mat)}
+.use-btn{display:inline-block; text-decoration:none; font-family:"Avenir Next",sans-serif; font-size:12px;
+  letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:#3A2E1A;
+  background:linear-gradient(180deg,#C9A96E,var(--brass-deep)); padding:14px 32px; border-radius:2px;
+  box-shadow:0 2px 6px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.4); margin-top:16px}
+.use-btn:hover{filter:brightness(1.08)}
 
 /* ---------- detail page ---------- */
 #detail{display:none}
@@ -677,6 +682,7 @@ function renderDetail(id){
         <button class="chipbtn" data-type="Suggest a change">Suggest a Change</button>
         <button class="chipbtn" data-type="Leave a note">Leave a Note</button>
       </div>
+      <a class="use-btn" href="${app.live || app.github}">Use ${app.name} Online →</a>
     </header>
     <div class="d-body">
       <div class="d-gallery">
@@ -693,15 +699,18 @@ function renderDetail(id){
           <div class="meter"><i style="width:${app.pct}%; background:${p.color}"></i></div>
         </div>
         <div class="d-card">
-          <h3>The Particulars</h3>
-          <dl class="d-facts">
-            <div><dt>Category</dt><dd>${app.cat}</dd></div>
-            <div><dt>Medium</dt><dd>${app.stack}</dd></div>
-            <div><dt>Born</dt><dd>${app.born}</dd></div>
-          </dl>
-          <div class="d-links">
-            ${app.live ? `<a class="d-link gold" href="${app.live}">Visit the App</a>` : ""}
-            <a class="d-link" href="${app.github}">View on GitHub</a>
+          <h3>Put ${app.name} on Your Home Screen</h3>
+          <div class="install">
+            <img class="install-icon" src="${ICONS[app.id] || ""}" alt="${app.name} home screen icon">
+            <div>
+              <ol>
+                <li>Open the app in <b>Safari</b> on your iPhone</li>
+                <li>Tap the <b>Share</b> button (the square with the arrow)</li>
+                <li>Scroll down and tap <b>“Add to Home Screen”</b></li>
+                <li>Tap <b>Add</b> — it now opens like a real app</li>
+              </ol>
+              <p class="install-note">On Android: open in Chrome, tap ⋮, then “Add to Home screen.”</p>
+            </div>
           </div>
         </div>
         <div class="d-card">
@@ -710,30 +719,27 @@ function renderDetail(id){
         </div>
       </div>
     </div>
-    ${mobiles.length ? `
     <div class="d-body" style="padding-top:0">
+      ${mobiles.length ? `
       <div class="d-card" style="flex:1">
         <h3>On the Phone</h3>
         <div class="phone-row">
           ${mobiles.map(k => `<span class="phone"><img src="${SCREENS[k]}" alt="${app.name} on mobile"></span>`).join("")}
         </div>
-      </div>
-      <div class="d-card" style="flex:1.2">
-        <h3>Put ${app.name} on Your Home Screen</h3>
-        <div class="install">
-          <img class="install-icon" src="${ICONS[app.id] || ""}" alt="${app.name} home screen icon">
-          <div>
-            <ol>
-              <li>Open the app in <b>Safari</b> on your iPhone</li>
-              <li>Tap the <b>Share</b> button (the square with the arrow)</li>
-              <li>Scroll down and tap <b>“Add to Home Screen”</b></li>
-              <li>Tap <b>Add</b> — it now opens like a real app</li>
-            </ol>
-            <p class="install-note">On Android: open in Chrome, tap ⋮, then “Add to Home screen.”</p>
-          </div>
+      </div>` : ""}
+      <div class="d-card" style="flex:1">
+        <h3>The Particulars</h3>
+        <dl class="d-facts">
+          <div><dt>Category</dt><dd>${app.cat}</dd></div>
+          <div><dt>Medium</dt><dd>${app.stack}</dd></div>
+          <div><dt>Born</dt><dd>${app.born}</dd></div>
+        </dl>
+        <div class="d-links">
+          ${app.live ? `<a class="d-link gold" href="${app.live}">Visit the App</a>` : ""}
+          <a class="d-link" href="${app.github}">View on GitHub</a>
         </div>
       </div>
-    </div>` : ""}
+    </div>
     <section class="formwrap" style="margin-top:20px">
       <div class="form-card">
         <p class="form-orn">✎</p>
