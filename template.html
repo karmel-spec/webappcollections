@@ -46,9 +46,33 @@ img{display:block; max-width:100%}
 .nav a:hover{color:var(--ink); border-bottom-color:var(--brass)}
 .nav a.nav-active{color:var(--ink); border-bottom-color:var(--brass)}
 
+/* hamburger: hidden on desktop, links collapse behind it on phones */
+.nav-toggle{display:none; font-family:"Avenir Next",sans-serif; font-size:11.5px; letter-spacing:.16em;
+  text-transform:uppercase; font-weight:600; color:var(--ink); background:var(--paper);
+  border:1.5px solid var(--brass-deep); border-radius:99px; padding:9px 22px; cursor:pointer}
+.nav-links{display:contents}
+@media (max-width:640px){
+  .nav{flex-direction:column; align-items:center; gap:10px}
+  .nav-toggle{display:block}
+  .nav-links{display:none; flex-direction:column; align-items:center; gap:2px; width:100%}
+  .nav.open .nav-links{display:flex}
+}
+
+/* ---------- category jump buttons ---------- */
+.catbar{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; padding:4px 0 8px}
+.catbtn{font-family:"Avenir Next",sans-serif; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:600; color:#3A2E1A; background:linear-gradient(180deg,#C9A96E,var(--brass-deep));
+  border:none; border-radius:2px; padding:8px 18px; cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.4)}
+.catbtn:hover{filter:brightness(1.08)}
+
 /* ---------- section paging: one section per page ---------- */
 #home .pg{display:none}
 #home .pg.active{display:block}
+
+/* footer extras */
+.footer .mast-stats{margin:0 0 6px}
+.footer .legend{padding:0 0 20px}
 
 /* ---------- phase legend ---------- */
 .legend{display:flex; justify-content:center; gap:8px 20px; flex-wrap:wrap; padding:16px 24px 0;
@@ -265,30 +289,23 @@ body.viewing #detail{display:block}
 <header class="masthead">
   <p class="mast-est">Est. 2026</p>
   <h1 class="mast-title">The Gallery</h1>
-  <p class="mast-sub">a collection of webapps to link for use, report bugs to fix, features to update, and share new webapp idea proposals</p>
-  <p class="mast-stats"><b>14</b> ready &amp; in progress · <b>6</b> on deck · <b>2</b> requested · <b>1</b> archived</p>
+  <p class="mast-sub">a collection of webapps</p>
   <div class="mast-rule"></div>
 </header>
 
 <nav class="nav" aria-label="Site sections">
-  <a href="#/p/collection">The Collection</a>
-  <a href="#/p/ondeck">On Deck</a>
-  <a href="#/p/requested">Requested</a>
-  <a href="#/p/queue">The Queue</a>
-  <a href="#/p/archived">Archived</a>
-  <a href="#/p/tally">The Tally</a>
-  <a href="#/p/complete">A–Z</a>
-  <a href="#/p/request">Request an App</a>
+  <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">☰ Menu</button>
+  <div class="nav-links" id="nav-links">
+    <a href="#/p/collection">The Collection</a>
+    <a href="#/p/ondeck">On Deck</a>
+    <a href="#/p/requested">Requested</a>
+    <a href="#/p/queue">The Queue</a>
+    <a href="#/p/archived">Archived</a>
+    <a href="#/p/tally">The Tally</a>
+    <a href="#/p/complete">A–Z</a>
+    <a href="#/p/request">Request an App</a>
+  </div>
 </nav>
-
-<div class="legend" id="legend" aria-label="Phase legend">
-  <span><i style="background:var(--ph-dreaming)"></i>Dreaming</span>
-  <span><i style="background:var(--ph-sketching)"></i>Sketching</span>
-  <span><i style="background:var(--ph-painting)"></i>Painting</span>
-  <span><i style="background:var(--ph-retouching)"></i>Retouching</span>
-  <span><i style="background:var(--ph-hung)"></i>Ready</span>
-  <span><i style="background:var(--ph-archived)"></i>Archived</span>
-</div>
 
 <main id="collection" class="section pg">
   <!-- walls are rendered by JS from APPS data -->
@@ -490,6 +507,15 @@ body.viewing #detail{display:block}
 </section>
 
 <footer class="footer">
+  <p class="mast-stats"><b>14</b> ready &amp; in progress · <b>6</b> on deck · <b>2</b> requested · <b>1</b> archived</p>
+  <div class="legend" id="legend" aria-label="Phase legend">
+    <span><i style="background:var(--ph-dreaming)"></i>Dreaming</span>
+    <span><i style="background:var(--ph-sketching)"></i>Sketching</span>
+    <span><i style="background:var(--ph-painting)"></i>Painting</span>
+    <span><i style="background:var(--ph-retouching)"></i>Retouching</span>
+    <span><i style="background:var(--ph-hung)"></i>Ready</span>
+    <span><i style="background:var(--ph-archived)"></i>Archived</span>
+  </div>
   <b>The Gallery</b>
   software by Karmel Larson &amp; team
 </footer>
@@ -609,13 +635,18 @@ function pieceHTML(app){
     <div class="lab"><b>${app.name}</b><i>${app.tag}</i>${badge(app)}</div>
   </a>`;
 }
+function catSlug(cat){ return cat.replace(" Apps","").toLowerCase(); }
 function renderWalls(){
   const host = document.getElementById("walls");
-  host.innerHTML = CATS.map(cat => {
+  const cats = CATS.filter(cat => APPS.some(a => a.cat === cat && !a.archived));
+  const catbar = `<div class="catbar">${cats.map(cat =>
+    `<button class="catbtn" data-cat="${catSlug(cat)}">${cat.replace(" Apps","")}</button>`).join("")}</div>`;
+  host.innerHTML = catbar + cats.map(cat => {
     const pieces = APPS.filter(a => a.cat === cat && !a.archived);
-    if(!pieces.length) return "";
-    return `<div class="plaque">${cat}</div><div class="wall">${pieces.map(pieceHTML).join("")}</div>`;
+    return `<div class="plaque" id="cat-${catSlug(cat)}">${cat}</div><div class="wall">${pieces.map(pieceHTML).join("")}</div>`;
   }).join("");
+  host.querySelectorAll(".catbtn").forEach(b => b.addEventListener("click", () =>
+    document.getElementById("cat-" + b.dataset.cat)?.scrollIntoView({behavior:"smooth", block:"start"})));
 }
 
 /* ============ render: a–z ============ */
@@ -763,13 +794,20 @@ function route(){
   const pm = location.hash.match(/^#\/p\/([a-z]+)$/);
   const page = (pm && PAGES.includes(pm[1])) ? pm[1] : "collection";
   document.querySelectorAll("#home .pg").forEach(s => s.classList.toggle("active", s.id === page));
-  const legend = document.getElementById("legend");
-  if(legend) legend.style.display = (page === "collection") ? "" : "none";
   document.querySelectorAll(".nav a").forEach(a =>
     a.classList.toggle("nav-active", a.getAttribute("href") === "#/p/" + page));
+  document.querySelector(".nav")?.classList.remove("open"); // collapse mobile menu after navigating
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
+
+/* hamburger menu (mobile) */
+const navToggle = document.getElementById("nav-toggle");
+navToggle?.addEventListener("click", () => {
+  const nav = navToggle.closest(".nav");
+  const open = nav.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", open);
+});
 
 /* ============ boot ============ */
 renderWalls();
