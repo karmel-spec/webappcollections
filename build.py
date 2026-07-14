@@ -12,7 +12,7 @@ import base64, html, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # Where the site will live. Update after deploying (or pass GALLERY_BASE_URL).
-BASE_URL = os.environ.get("GALLERY_BASE_URL", "https://webappcollections.netlify.app").rstrip("/")
+BASE_URL = os.environ.get("GALLERY_BASE_URL", "https://webappgallery.com").rstrip("/")
 
 def embed(dirname, ext, mime):
     d = os.path.join(HERE, "assets", dirname)
