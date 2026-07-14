@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Larson Gallery — fourteen working apps, hung with care</title>
+<title>The Gallery — a collection of webapps by Karmel Larson &amp; team</title>
 <meta name="description" content="The complete collection of webapps built by Karmel Larson — for the piano shop, Momni, the family, the garden, and everything in between. Browse the walls, peek at what's on deck, and request an app of your own.">
 <link rel="apple-touch-icon" href="assets/icons/gallery.png">
 <link rel="icon" type="image/png" href="assets/icons/gallery.png">
@@ -44,6 +44,11 @@ img{display:block; max-width:100%}
   font-family:"Avenir Next",sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase}
 .nav a{text-decoration:none; color:var(--ink-soft); padding:6px 2px; border-bottom:1px solid transparent}
 .nav a:hover{color:var(--ink); border-bottom-color:var(--brass)}
+.nav a.nav-active{color:var(--ink); border-bottom-color:var(--brass)}
+
+/* ---------- section paging: one section per page ---------- */
+#home .pg{display:none}
+#home .pg.active{display:block}
 
 /* ---------- phase legend ---------- */
 .legend{display:flex; justify-content:center; gap:8px 20px; flex-wrap:wrap; padding:16px 24px 0;
@@ -258,53 +263,52 @@ body.viewing #detail{display:block}
 <div id="home">
 
 <header class="masthead">
-  <p class="mast-est">Est. 2026 · Utah County</p>
-  <h1 class="mast-title">The Larson Gallery</h1>
-  <p class="mast-sub">fourteen working apps, hung with care — built by mama</p>
-  <p class="mast-stats"><b>14</b> hung &amp; in progress · <b>3</b> on deck · <b>2</b> requested · <b>3</b> archived</p>
+  <p class="mast-est">Est. 2026</p>
+  <h1 class="mast-title">The Gallery</h1>
+  <p class="mast-sub">a collection of webapps to link for use, report bugs to fix, features to update, and share new webapp idea proposals</p>
+  <p class="mast-stats"><b>14</b> ready &amp; in progress · <b>6</b> on deck · <b>2</b> requested · <b>1</b> archived</p>
   <div class="mast-rule"></div>
 </header>
 
 <nav class="nav" aria-label="Site sections">
-  <a href="#collection">The Collection</a>
-  <a href="#ondeck">On Deck</a>
-  <a href="#requested">Requested</a>
-  <a href="#queue">The Queue</a>
-  <a href="#archived">Archived</a>
-  <a href="#tally">The Tally</a>
-  <a href="#complete">A–Z</a>
-  <a href="#request">Request an App</a>
+  <a href="#/p/collection">The Collection</a>
+  <a href="#/p/ondeck">On Deck</a>
+  <a href="#/p/requested">Requested</a>
+  <a href="#/p/queue">The Queue</a>
+  <a href="#/p/archived">Archived</a>
+  <a href="#/p/tally">The Tally</a>
+  <a href="#/p/complete">A–Z</a>
+  <a href="#/p/request">Request an App</a>
 </nav>
 
-<div class="legend" aria-label="Phase legend">
+<div class="legend" id="legend" aria-label="Phase legend">
   <span><i style="background:var(--ph-dreaming)"></i>Dreaming</span>
   <span><i style="background:var(--ph-sketching)"></i>Sketching</span>
   <span><i style="background:var(--ph-painting)"></i>Painting</span>
   <span><i style="background:var(--ph-retouching)"></i>Retouching</span>
-  <span><i style="background:var(--ph-hung)"></i>Hung</span>
+  <span><i style="background:var(--ph-hung)"></i>Ready</span>
   <span><i style="background:var(--ph-archived)"></i>Archived</span>
 </div>
 
-<main id="collection" class="section">
+<main id="collection" class="section pg">
   <!-- walls are rendered by JS from APPS data -->
   <div id="walls"></div>
 </main>
 
 <!-- ================= ON DECK ================= -->
-<section id="ondeck" class="tinted">
+<section id="ondeck" class="tinted pg">
   <div class="section" style="padding-top:38px">
     <div class="section-head">
       <h2 class="section-title">On Deck — The App Planner</h2>
-      <p class="section-sub">Karmel's next canvases — sketched, queued, and waiting for the easel.</p>
+      <p class="section-sub">next webapps — sketched, queued, and waiting for the easel.</p>
     </div>
   </div>
-  <!-- EDIT ME: replace these with your real planned apps -->
   <div class="sketch-wall">
     <div class="sketch">
       <span style="text-align:center"><span class="queue-chip">Queue #1</span></span>
       <div class="sk-fr"><div class="sk-canvas">
-        <span class="sk-name">Lesson Studio</span>
-        <span class="sk-what">piano lesson scheduling for the shop</span>
+        <span class="sk-name">BLP Shop Friday Clean Up</span>
+        <span class="sk-what">the weekly shop reset, organized</span>
         <span class="badge"><i style="background:var(--ph-sketching)"></i>Sketching · 20%</span>
       </div></div>
       <p class="sk-lab">next on the easel</p>
@@ -312,8 +316,8 @@ body.viewing #detail{display:block}
     <div class="sketch">
       <span style="text-align:center"><span class="queue-chip">Queue #2</span></span>
       <div class="sk-fr"><div class="sk-canvas">
-        <span class="sk-name">Recipe Box</span>
-        <span class="sk-what">the family recipes, finally in one place</span>
+        <span class="sk-name">BLP Team Weekly Scheduler</span>
+        <span class="sk-what">who's on, when, at the shop</span>
         <span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming · 5%</span>
       </div></div>
       <p class="sk-lab">penciled in</p>
@@ -321,8 +325,35 @@ body.viewing #detail{display:block}
     <div class="sketch">
       <span style="text-align:center"><span class="queue-chip">Queue #3</span></span>
       <div class="sk-fr"><div class="sk-canvas">
-        <span class="sk-name">Holiday HQ</span>
-        <span class="sk-what">gifts, cards &amp; the christmas list</span>
+        <span class="sk-name">Familopedia</span>
+        <span class="sk-what">the family encyclopedia</span>
+        <span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming · 5%</span>
+      </div></div>
+      <p class="sk-lab">penciled in</p>
+    </div>
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #4</span></span>
+      <div class="sk-fr"><div class="sk-canvas">
+        <span class="sk-name">Brielle's Notes &amp; Agent Charity</span>
+        <span class="sk-what">notes &amp; a helping-hands agent</span>
+        <span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming · 5%</span>
+      </div></div>
+      <p class="sk-lab">penciled in</p>
+    </div>
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #5</span></span>
+      <div class="sk-fr"><div class="sk-canvas">
+        <span class="sk-name">Larson Ledger</span>
+        <span class="sk-what">the family books, balanced</span>
+        <span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming · 5%</span>
+      </div></div>
+      <p class="sk-lab">penciled in</p>
+    </div>
+    <div class="sketch">
+      <span style="text-align:center"><span class="queue-chip">Queue #6</span></span>
+      <div class="sk-fr"><div class="sk-canvas">
+        <span class="sk-name">Home Assistant WebApp</span>
+        <span class="sk-what">the house, at your command</span>
         <span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming · 5%</span>
       </div></div>
       <p class="sk-lab">penciled in</p>
@@ -331,7 +362,7 @@ body.viewing #detail{display:block}
 </section>
 
 <!-- ================= REQUESTED ================= -->
-<section id="requested" class="section">
+<section id="requested" class="section pg">
   <div class="section-head">
     <h2 class="section-title">Requested</h2>
     <p class="section-sub">other people's wishes, pinned to the studio wall — add yours below.</p>
@@ -339,7 +370,7 @@ body.viewing #detail{display:block}
   <!-- EDIT ME: sample requests — real ones arrive via the form -->
   <div class="sketch-wall">
     <div class="sketch">
-      <span style="text-align:center"><span class="queue-chip">Queue #4</span></span>
+      <span style="text-align:center"><span class="queue-chip">Queue #7</span></span>
       <div class="note-card">
         <span class="sk-name" style="font-size:19px">Practice Tracker</span>
         <p class="sk-what" style="margin:6px 0 0">stickers &amp; streaks for piano practice minutes</p>
@@ -347,7 +378,7 @@ body.viewing #detail{display:block}
       </div>
     </div>
     <div class="sketch">
-      <span style="text-align:center"><span class="queue-chip">Queue #5</span></span>
+      <span style="text-align:center"><span class="queue-chip">Queue #8</span></span>
       <div class="note-card">
         <span class="sk-name" style="font-size:19px">Book Swap</span>
         <p class="sk-what" style="margin:6px 0 0">a neighborhood lending library, online</p>
@@ -358,28 +389,30 @@ body.viewing #detail{display:block}
 </section>
 
 <!-- ================= THE QUEUE ================= -->
-<section id="queue" class="section">
+<section id="queue" class="section pg">
   <div class="section-head">
     <h2 class="section-title">The Queue</h2>
     <p class="section-sub">what gets painted next, in order. request a spot — and say where you'd like to land.</p>
   </div>
   <ol class="queue-list">
-    <li class="queue-row"><span class="queue-num">1</span><div><b>Lesson Studio</b><i>Karmel's pick — piano lessons for the shop</i></div><span class="badge"><i style="background:var(--ph-sketching)"></i>Sketching</span></li>
-    <li class="queue-row"><span class="queue-num">2</span><div><b>Recipe Box</b><i>Karmel's pick — the family cookbook</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
-    <li class="queue-row"><span class="queue-num">3</span><div><b>Holiday HQ</b><i>Karmel's pick — gifts &amp; cards</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
-    <li class="queue-row"><span class="queue-num">4</span><div><b>Practice Tracker</b><i>requested by a piano parent</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
-    <li class="queue-row"><span class="queue-num">5</span><div><b>Book Swap</b><i>requested by a neighbor</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">1</span><div><b>BLP Shop Friday Clean Up</b><i>the weekly shop reset, organized</i></div><span class="badge"><i style="background:var(--ph-sketching)"></i>Sketching</span></li>
+    <li class="queue-row"><span class="queue-num">2</span><div><b>BLP Team Weekly Scheduler</b><i>who's on, when, at the shop</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">3</span><div><b>Familopedia</b><i>the family encyclopedia</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">4</span><div><b>Brielle's Notes &amp; Agent Charity</b><i>notes &amp; a helping-hands agent</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">5</span><div><b>Larson Ledger</b><i>the family books, balanced</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">6</span><div><b>Home Assistant WebApp</b><i>the house, at your command</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">7</span><div><b>Practice Tracker</b><i>requested by a piano parent</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
+    <li class="queue-row"><span class="queue-num">8</span><div><b>Book Swap</b><i>requested by a neighbor</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>Dreaming</span></li>
   </ol>
-  <p class="queue-note">Five in line today. When you <a href="#request">request an app</a>, tell me where you hope it lands — front of the line, "whenever," or somewhere in between — and I'll do my honest best.</p>
+  <p class="queue-note">Eight in line today. When you <a href="#/p/request">request an app</a>, tell me where you hope it lands — front of the line, "whenever," or somewhere in between — and I'll do my honest best.</p>
 </section>
 
-<hr class="section-divider">
 
 <!-- ================= ARCHIVED ================= -->
-<section id="archived" class="section arch">
+<section id="archived" class="section arch pg">
   <div class="section-head">
-    <h2 class="section-title">The Archive Wing</h2>
-    <p class="section-sub">retired with honor — early works and canvases that never met a brush.</p>
+    <h2 class="section-title">The Archive</h2>
+    <p class="section-sub">retired with honor — early works whose lessons live on in newer apps.</p>
   </div>
   <div class="wall">
     <a class="piece" href="#/app/choreapp" style="width:270px">
@@ -387,21 +420,11 @@ body.viewing #detail{display:block}
       <div class="lab"><b>Teamwork Chores</b><i>the original chore app — superseded by v2</i>
       <span class="badge"><i style="background:var(--ph-archived)"></i>Archived</span></div>
     </a>
-    <div class="piece" style="width:270px; cursor:default">
-      <div class="fr brass"><div class="blank-canvas"><span>momniapp —<br>a canvas stretched, never painted</span></div></div>
-      <div class="lab"><b>Momni App</b><i>reserved for a future chapter</i>
-      <span class="badge"><i style="background:var(--ph-archived)"></i>Archived</span></div>
-    </div>
-    <div class="piece" style="width:270px; cursor:default">
-      <div class="fr brass"><div class="blank-canvas"><span>FitnessApp —<br>a canvas stretched, never painted</span></div></div>
-      <div class="lab"><b>Fitness App</b><i>the idea went to LightenUP instead</i>
-      <span class="badge"><i style="background:var(--ph-archived)"></i>Archived</span></div>
-    </div>
   </div>
 </section>
 
 <!-- ================= THE TALLY ================= -->
-<section id="tally" class="section">
+<section id="tally" class="section pg">
   <div class="section-head">
     <h2 class="section-title">The Tally</h2>
     <p class="section-sub">the collection, counted by category</p>
@@ -410,22 +433,21 @@ body.viewing #detail{display:block}
     <p class="tally-title">the app tally ✿</p>
     <p class="tally-sub">2026 edition</p>
     <ul class="tally-list">
-      <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>4 hung</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#E4756B"></span><b>Momni</b><span class="tally-dots"></span><span>3 hung</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>1 hung · 1 archived</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>1 hung</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>1 hung</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>1 hung</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#A6988A"></span><b>Hobby Apps</b><span class="tally-dots"></span><span>2 hung</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>4 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#E4756B"></span><b>Momni</b><span class="tally-dots"></span><span>3 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>1 ready · 1 archived</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>1 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>1 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>1 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#A6988A"></span><b>Hobby Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
     </ul>
-    <div class="tally-total"><span>The whole wall</span><span>14 hung · 3 on deck · 2 requested</span></div>
+    <div class="tally-total"><span>The whole wall</span><span>14 ready · 6 on deck · 2 requested</span></div>
   </div>
 </section>
 
-<hr class="section-divider">
 
 <!-- ================= A–Z ================= -->
-<section id="complete" class="section">
+<section id="complete" class="section pg">
   <div class="section-head">
     <h2 class="section-title">The Complete Collection</h2>
     <p class="section-sub">every app, alphabetical &amp; linked</p>
@@ -434,7 +456,7 @@ body.viewing #detail{display:block}
 </section>
 
 <!-- ================= REQUEST AN APP ================= -->
-<section id="request" class="formwrap">
+<section id="request" class="formwrap pg">
   <div class="form-card">
     <p class="form-orn">❧</p>
     <h2 class="form-title">Request an App</h2>
@@ -464,13 +486,12 @@ body.viewing #detail{display:block}
       </div>
       <div style="text-align:center; margin-top:8px"><button class="btn" type="submit">Pin It to the Wall</button></div>
     </form>
-    <p class="form-alt">or email <a href="mailto:karmel@brighamlarsonpianos.com">karmel@brighamlarsonpianos.com</a></p>
   </div>
 </section>
 
 <footer class="footer">
-  <b>The Larson Gallery</b>
-  software for the shop, the fam, the garden &amp; me — built by Karmel Larson
+  <b>The Gallery</b>
+  software by Karmel Larson &amp; team
 </footer>
 
 </div><!-- /home -->
@@ -496,18 +517,18 @@ const PHASES = {
   sketching:  {word:"Sketching",  color:"var(--ph-sketching)"},
   painting:   {word:"Painting",   color:"var(--ph-painting)"},
   retouching: {word:"Retouching", color:"var(--ph-retouching)"},
-  hung:       {word:"Hung",       color:"var(--ph-hung)"},
+  hung:       {word:"Ready",      color:"var(--ph-hung)"},
   archived:   {word:"Archived",   color:"var(--ph-archived)"},
 };
 
 /* ============ the collection ============ */
 const APPS = [
-  {id:"pianolog", name:"Piano Log", cat:"BLP Apps", frame:"wood", big:true,
+  {id:"pianolog", name:"BLP Piano Log", cat:"BLP Apps", frame:"wood", big:true,
    tag:"the showroom floor, inventoried", phase:"hung", pct:100,
    stack:"HTML · Google Sheets sync", born:"2026",
    github:"https://github.com/karmel-spec/pianolog", live:"",
    story:"Every piano at Brigham Larson Pianos, accounted for. Piano Log reads straight from the shop's inventory sheet, so the team can search by make, serial, section, or owner and always trust what they see. It was the first BLP tool to get real branding — and it set the bar for everything after."},
-  {id:"salesapp2", name:"Sales Console", cat:"BLP Apps", frame:"brass",
+  {id:"salesapp2", name:"BLP Sales Console", cat:"BLP Apps", frame:"brass",
    tag:"leads logged, follow-ups drafted", phase:"retouching", pct:85,
    stack:"TypeScript · Leads Log sheet · Arnold drafts", born:"2026",
    github:"https://github.com/karmel-spec/salesapp2", live:"",
@@ -517,7 +538,7 @@ const APPS = [
    stack:"HTML · Netlify · Sheets sync", born:"2026",
    github:"https://github.com/karmel-spec/BLPOperationsWebApp", live:"",
    story:"The mega-app: a sales console plus thirty-three working modules — tuning CRM, marketing, onboarding, org charts, and more — all under one roof. It's the busiest wall in the gallery, and it's getting a careful audit pass right now."},
-  {id:"pricetags", name:"Price Tag Maker", cat:"BLP Apps", frame:"wood",
+  {id:"pricetags", name:"BLP Price Tag Maker", cat:"BLP Apps", frame:"wood",
    tag:"print-ready showroom tags", phase:"hung", pct:100,
    stack:"HTML · print CSS · QR codes", born:"2026",
    github:"https://github.com/karmel-spec/pricetags", live:"",
@@ -528,12 +549,12 @@ const APPS = [
    github:"https://github.com/karmel-spec/momni", live:"",
    story:"Momni is Karmel's founding work: a community of Momnis sharing care, mom to mom — for right now, date night, regular mornings, overnights, and everything in between. Circle up. Link together. The site is in beta behind a gate, being polished for the world."},
   {id:"momnif", name:"Momni Foundation", cat:"Momni", frame:"wood",
-   tag:"hour for hour, mother to mother", phase:"hung", pct:100,
+   tag:"hour for hour, mother to mother", phase:"painting", pct:50,
    stack:"HTML · 501(c)(3)", born:"2026",
    github:"https://github.com/karmel-spec/momnifoundation", live:"",
    story:"The giving arm of Momni: a 501(c)(3) where every hour of care shared in the community helps fund an hour of care for a family in need. The site tells that story — hour for hour, mother to mother."},
   {id:"karmel", name:"karmellarson.com", cat:"Momni", frame:"wood",
-   tag:"mama karmel — founder & author", phase:"hung", pct:100,
+   tag:"mama karmel — founder & author", phase:"painting", pct:50,
    stack:"HTML · Editorial Ivory design", born:"2026",
    github:"https://github.com/karmel-spec/karmellarson", live:"",
    story:"The founder site: Mama Karmel, founder of Momni and author of Circle Up. A single quiet page in Editorial Ivory that introduces the person behind everything else on this wall."},
@@ -563,7 +584,7 @@ const APPS = [
    github:"https://github.com/karmel-spec/Greenhouse", live:"",
    story:"Beds, sowings, seasons, and sections — the greenhouse, systematized. Garden OS is the most actively growing piece in the gallery (fitting), with new sections still being planted every week."},
   {id:"tamedog", name:"Tame Dog", cat:"Hobby Apps", frame:"black",
-   tag:"the band site, pre-launch", phase:"retouching", pct:75,
+   tag:"the band site", phase:"hung", pct:100,
    stack:"HTML · garage-poster style", born:"2026",
    github:"https://github.com/karmel-spec/tamedog", live:"",
    story:"Music, shows, merch, and a photo gallery in full Garage Poster style — loud on purpose. The launch checklist is nearly done; then the amps go up."},
@@ -614,7 +635,7 @@ function renderDetail(id){
   const shots = [app.id + "-main", ...["-d1","-d2","-d3","-d4"].map(s => app.id + s)].filter(k => SCREENS[k]);
   const mobiles = ["-m1","-m2"].map(s => app.id + s).filter(k => SCREENS[k]);
   document.getElementById("detail").innerHTML = `
-    <div class="d-top"><a class="d-back" href="#collection">← back to the gallery</a></div>
+    <div class="d-top"><a class="d-back" href="#/p/collection">← back to the gallery</a></div>
     <header class="d-head">
       <p class="d-cat">${app.cat}</p>
       <h1 class="d-title">${app.name}</h1>
@@ -623,7 +644,7 @@ function renderDetail(id){
         <button class="chipbtn" data-type="Report a bug">Report a Bug</button>
         <button class="chipbtn" data-type="Request a feature">Request a Feature</button>
         <button class="chipbtn" data-type="Suggest a change">Suggest a Change</button>
-        <button class="chipbtn" data-type="Leave a love note">Leave a Love Note</button>
+        <button class="chipbtn" data-type="Leave a note">Leave a Note</button>
       </div>
     </header>
     <div class="d-body">
@@ -698,7 +719,7 @@ function renderDetail(id){
               <option>Request a feature</option>
               <option>Ask a question</option>
               <option>Share how you use it</option>
-              <option>Leave a love note</option>
+              <option>Leave a note</option>
             </select>
           </div>
           <div class="field-row">
@@ -710,7 +731,7 @@ function renderDetail(id){
         </form>
       </div>
     </section>
-    <footer class="footer"><b>The Larson Gallery</b>software for the shop, the fam, the garden &amp; me</footer>`;
+    <footer class="footer"><b>The Gallery</b>software by Karmel Larson &amp; team</footer>`;
   // thumb swap
   document.querySelectorAll(".d-thumb").forEach(t => {
     const go = () => {
@@ -734,10 +755,19 @@ function renderDetail(id){
 }
 
 /* ============ router ============ */
+const PAGES = ["collection","ondeck","requested","queue","archived","tally","complete","request"];
 function route(){
-  const m = location.hash.match(/^#\/app\/([a-z0-9]+)$/);
-  if(m){ document.body.classList.add("viewing"); renderDetail(m[1]); }
-  else { document.body.classList.remove("viewing"); }
+  const app = location.hash.match(/^#\/app\/([a-z0-9]+)$/);
+  if(app){ document.body.classList.add("viewing"); renderDetail(app[1]); return; }
+  document.body.classList.remove("viewing");
+  const pm = location.hash.match(/^#\/p\/([a-z]+)$/);
+  const page = (pm && PAGES.includes(pm[1])) ? pm[1] : "collection";
+  document.querySelectorAll("#home .pg").forEach(s => s.classList.toggle("active", s.id === page));
+  const legend = document.getElementById("legend");
+  if(legend) legend.style.display = (page === "collection") ? "" : "none";
+  document.querySelectorAll(".nav a").forEach(a =>
+    a.classList.toggle("nav-active", a.getAttribute("href") === "#/p/" + page));
+  window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
 
