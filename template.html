@@ -466,13 +466,13 @@ body.viewing #detail{display:block}
     <ul class="tally-list">
       <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>5 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#E4756B"></span><b>Momni</b><span class="tally-dots"></span><span>3 ready</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>1 ready · 1 archived</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>2 ready · 1 archived</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>1 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>1 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>1 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#A6988A"></span><b>Hobby Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
     </ul>
-    <div class="tally-total"><span>The whole wall</span><span>15 ready · 6 on deck · 2 requested</span></div>
+    <div class="tally-total"><span>The whole wall</span><span>16 ready · 6 on deck · 2 requested</span></div>
   </div>
 </section>
 
@@ -521,7 +521,7 @@ body.viewing #detail{display:block}
 </section>
 
 <footer class="footer">
-  <p class="mast-stats"><b>15</b> ready &amp; in progress · <b>6</b> on deck · <b>2</b> requested · <b>1</b> archived</p>
+  <p class="mast-stats"><b>16</b> ready &amp; in progress · <b>6</b> on deck · <b>2</b> requested · <b>1</b> archived</p>
   <div class="legend" id="legend" aria-label="Phase legend">
     <span><i style="background:var(--ph-dreaming)"></i>Dreaming</span>
     <span><i style="background:var(--ph-sketching)"></i>Sketching</span>
@@ -608,6 +608,11 @@ const APPS = [
    stack:"Next.js · SQLite · Railway", born:"2026",
    github:"https://github.com/karmel-spec/FamChoresV2", live:"",
    story:"Chores rotate among the kids each day, balanced by time and difficulty, with a parent admin backend and per-child dashboards. Version two of the chore experiment — the one that finally ended the chore wars. Deployed and in daily use."},
+  {id:"movieclub", name:"The Movie Club", cat:"Family Apps", frame:"brass", private:true,
+   tag:"19 years of first Thursdays", phase:"hung", pct:100,
+   stack:"React · Netlify Blobs · club sheets", born:"2026",
+   github:"https://github.com/karmel-spec/TheMovieClubApp", live:"https://themovieclubapp.com",
+   story:"A Father's Day gift for Brigham: the movie club he founded in 2007, hung online at last. The marquee counts down to the next screening with a real ticket to RSVP, the archive holds every film since Le Trou in April 2007 with original posters, and the stats page tallies the club's 456 hours in the dark together. Presenters get their hall of fame, members claim their profiles, and the club roster stays where it belongs — the code is kept private to protect the list."},
   {id:"starlar", name:"Starlar", cat:"Finance Apps", frame:"brass", private:true,
    tag:"the family book, kept private", phase:"hung", pct:100,
    stack:"Next.js · private repo", born:"2026",
@@ -701,7 +706,7 @@ function renderDetail(id){
         <button class="share-btn" id="share-btn">Share This App ↗</button>
       </div>
       ${!app.live && !app.private ? `<p class="d-tag" style="font-size:13px; margin-top:12px">not yet hung online — the code lives on GitHub below</p>` : ""}
-      ${app.private ? `<p class="d-tag" style="font-size:13px; margin-top:12px">kept behind glass — this piece is private to the family</p>` : ""}
+      ${app.private && !app.live ? `<p class="d-tag" style="font-size:13px; margin-top:12px">kept behind glass — this piece is private to the family</p>` : ""}
     </header>
     <div class="d-body">
       <div class="d-gallery">
