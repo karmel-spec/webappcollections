@@ -48,9 +48,18 @@ gets painted next, and Netlify feedback forms. Live at webappgallery.com
 
 ## Forms
 Netlify Forms: `app-request` (the Queue request form) and `app-feedback`
-(per-app, rendered dynamically — the hidden static `<form name="app-feedback">`
-near the top of the JS section is what registers it with Netlify; keep it).
-Submissions land in the Netlify dashboard.
+(per-app, rendered dynamically). Three moving parts — keep all of them:
+- `forms.html` — tiny static page whose only job is form REGISTRATION with
+  Netlify's detector (index.html is ~2 MB and may be skipped by
+  post-processing). Its field names must match what the site posts.
+- Both forms submit via `ajaxify()` in template.html (fetch POST to `/`,
+  on-brand toast, stays in the SPA); native fallback posts to `/thanks/`
+  (styled static page).
+- Netlify requires **form detection enabled** in Site configuration →
+  Forms — without it every POST returns 404. If forms 404, check that
+  toggle first, then redeploy.
+Submissions land in the Netlify dashboard (set up email notifications
+there too).
 
 ## Voice & design
 Gallery-wall metaphor throughout: apps are paintings, phases are studio

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gallery form registration</title>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<!-- This page exists only so Netlify's form detection registers both forms
+     from a small file it is guaranteed to parse (index.html is ~2 MB, which
+     can be skipped by post-processing). Field names must match what the
+     gallery actually posts. Not linked from anywhere. -->
+
+<form name="app-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/" hidden>
+  <input type="hidden" name="form-name" value="app-request">
+  <input name="bot-field">
+  <input name="name">
+  <input name="email" type="email">
+  <input name="app-name">
+  <textarea name="vision"></textarea>
+  <input name="category">
+  <input name="queue-hope">
+</form>
+
+<form name="app-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/" hidden>
+  <input type="hidden" name="form-name" value="app-feedback">
+  <input name="bot-field">
+  <input name="app">
+  <input name="type">
+  <input name="name">
+  <input name="email" type="email">
+  <textarea name="message"></textarea>
+</form>
+
+</body>
+</html>

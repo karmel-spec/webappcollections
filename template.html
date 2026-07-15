@@ -492,7 +492,7 @@ body.viewing #detail{display:block}
     <p class="form-orn">❧</p>
     <h2 class="form-title">Request an App</h2>
     <p class="form-copy">Wish an app existed for your shop, your family, or your thing? Share the vision — the best requests get a sticky note on the studio wall and a spot in the queue.</p>
-    <form name="app-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="#request">
+    <form name="app-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/">
       <input type="hidden" name="form-name" value="app-request">
       <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="field-row">
@@ -581,7 +581,7 @@ const APPS = [
   {id:"pricetags", name:"BLP Price Tag Maker", cat:"BLP Apps", frame:"wood",
    tag:"print-ready showroom tags", phase:"hung", pct:100,
    stack:"HTML · print CSS · QR codes", born:"2026",
-   github:"https://github.com/karmel-spec/pricetags", live:"",
+   github:"https://github.com/karmel-spec/pricetags", live:"https://blppricetags.netlify.app",
    story:"Walk the floor, photograph a serial number, fill in the worksheet, print the official tag — QR code, monthly finance payment, and all. A small tool that saves the showroom team real time every single week."},
   {id:"momni", name:"Momni", cat:"Momni", frame:"brass", big:true,
    tag:"caresharing, mom to mom — now in beta", phase:"retouching", pct:90,
@@ -603,7 +603,7 @@ const APPS = [
    stack:"Next.js · SQLite · Railway", born:"2026",
    github:"https://github.com/karmel-spec/FamChoresV2", live:"",
    story:"Chores rotate among the kids each day, balanced by time and difficulty, with a parent admin backend and per-child dashboards. Version two of the chore experiment — the one that finally ended the chore wars. Deployed and in daily use."},
-  {id:"starlar", name:"Starlar", cat:"Finance Apps", frame:"brass",
+  {id:"starlar", name:"Starlar", cat:"Finance Apps", frame:"brass", private:true,
    tag:"the family book, kept private", phase:"hung", pct:100,
    stack:"Next.js · private repo", born:"2026",
    github:"https://github.com/karmel-spec/starlar", live:"",
@@ -621,7 +621,7 @@ const APPS = [
   {id:"greenhouse", name:"Garden OS", cat:"Hobby Apps", frame:"black", big:true,
    tag:"the greenhouse brain, growing", phase:"retouching", pct:80,
    stack:"Next.js · Supabase · Netlify", born:"2026",
-   github:"https://github.com/karmel-spec/Greenhouse", live:"https://greenhouse.netlify.app",
+   github:"https://github.com/karmel-spec/Greenhouse", live:"",
    story:"Beds, sowings, seasons, and sections — the greenhouse, systematized. Garden OS is the most actively growing piece in the gallery (fitting), with new sections still being planted every week."},
   {id:"tamedog", name:"Tame Dog", cat:"Hobby Apps", frame:"black",
    tag:"the band site", phase:"hung", pct:100,
@@ -692,9 +692,11 @@ function renderDetail(id){
         <button class="chipbtn" data-type="Leave a note">Leave a Note</button>
       </div>
       <div class="d-actions">
-        <a class="use-btn" href="${app.live || app.github}">Use ${app.name} Online →</a>
+        ${app.live ? `<a class="use-btn" href="${app.live}">Use ${app.name} Online →</a>` : ""}
         <button class="share-btn" id="share-btn">Share This App ↗</button>
       </div>
+      ${!app.live && !app.private ? `<p class="d-tag" style="font-size:13px; margin-top:12px">not yet hung online — the code lives on GitHub below</p>` : ""}
+      ${app.private ? `<p class="d-tag" style="font-size:13px; margin-top:12px">kept behind glass — this piece is private to the family</p>` : ""}
     </header>
     <div class="d-body">
       <div class="d-gallery">
@@ -748,7 +750,9 @@ function renderDetail(id){
         </dl>
         <div class="d-links">
           ${app.live ? `<a class="d-link gold" href="${app.live}">Visit the App</a>` : ""}
-          <a class="d-link" href="${app.github}">View on GitHub</a>
+          ${app.private
+            ? `<span class="d-link" style="border-style:dashed; opacity:.6; cursor:default">Private Collection</span>`
+            : `<a class="d-link" href="${app.github}">View on GitHub</a>`}
         </div>
       </div>
     </div>
@@ -757,7 +761,7 @@ function renderDetail(id){
         <p class="form-orn">✎</p>
         <h2 class="form-title">Leave a Note About ${app.name}</h2>
         <p class="form-copy">Found a bug? Have an idea? Just want to say it made your day? Every note lands in Karmel's inbox.</p>
-        <form name="app-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="#/app/${app.id}">
+        <form name="app-feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/">
           <input type="hidden" name="form-name" value="app-feedback">
           <input type="hidden" name="app" value="${app.name}">
           <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
@@ -804,6 +808,9 @@ function renderDetail(id){
       catch(e){ showToast(shareUrl); }
     }
   });
+  // feedback form: submit in place with an on-brand toast
+  ajaxify(document.querySelector('#detail form[name="app-feedback"]'),
+    "Your note is on its way to Karmel — thank you!");
   // quick-action chips: preselect the note type and jump to the form
   document.querySelectorAll(".chipbtn").forEach(c => {
     c.addEventListener("click", () => {
@@ -825,6 +832,34 @@ function showToast(msg){
   t.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* ============ netlify forms: submit in place, stay in the gallery ============
+   POSTs the urlencoded form to "/" (Netlify intercepts any path once the form
+   is registered) and shows an on-brand toast. If fetch fails, falls back to a
+   plain submit so the styled /thanks/ page still catches it. */
+function ajaxify(form, successMsg){
+  if(!form) return;
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const orig = btn.textContent;
+    btn.disabled = true; btn.textContent = "Sending…";
+    try{
+      const res = await fetch("/", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: new URLSearchParams(new FormData(form)).toString(),
+      });
+      if(!res.ok) throw new Error("HTTP " + res.status);
+      form.reset();
+      showToast(successMsg);
+    }catch(err){
+      form.submit(); // native fallback → styled /thanks/ page
+    }finally{
+      btn.disabled = false; btn.textContent = orig;
+    }
+  });
 }
 
 /* ============ router ============ */
@@ -854,6 +889,8 @@ navToggle?.addEventListener("click", () => {
 /* ============ boot ============ */
 renderWalls();
 renderAZ();
+ajaxify(document.querySelector('#request form[name="app-request"]'),
+  "Pinned to the studio wall — thank you!");
 document.querySelectorAll("img[data-shot]").forEach(img => {
   const k = img.dataset.shot;
   if(SCREENS[k]) img.src = SCREENS[k];
