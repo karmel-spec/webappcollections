@@ -563,11 +563,11 @@ const APPS = [
    stack:"HTML · Fusion 360 files · training video", born:"2026",
    github:"https://github.com/karmel-spec/BLPResourceLibrary", live:"https://pianotechnologylibrary.com",
    story:"An open rebuilding library for piano technicians everywhere: Fusion 360 models of obsolete parts, shop-built jigs and fixtures, and training video straight from a working restoration shop. Drawn like a drafting table, organized like a card catalog, and free on purpose — download, reproduce, and keep the craft alive."},
-  {id:"blpshop", name:"BLP Shop Reports", cat:"BLP Apps", frame:"black",
-   tag:"the friday ritual, filed for good", phase:"hung", pct:100,
-   stack:"HTML · Google Sheets sync · EN/ES", born:"2026",
+  {id:"blpshop", name:"BLP Piano Shop", cat:"BLP Apps", frame:"black",
+   tag:"restoration systems, training and reports", phase:"retouching", pct:80,
+   installName:"BLP Piano Shop Webapp", stack:"HTML · Google Sheets sync · EN/ES", born:"2026",
    github:"https://github.com/karmel-spec/BLPShop", live:"https://blpshop.netlify.app",
-   story:"Every Friday since 2017, the shop's technicians have written up their week — what got finished, what carries over. Shop Reports turns that ritual into a live app over the very same Google Sheet: a dashboard of who's reported, an assignment planner built from this week's carry-overs, per-piano hours, and the Restoration Handbook and Shop Policies rendered right inside — in English and Spanish, with the training videos embedded where the QR codes used to be. Four and a half thousand reports and counting, and the sheet stays the source of truth. It started life on this very wall as a sketch called Friday Clean Up."},
+   story:"Every Friday since 2017, the shop's technicians have written up their week — what got finished, what carries over. BLP Piano Shop turns that ritual into a live app over the very same Google Sheet: a dashboard of who's reported, an assignment planner built from this week's carry-overs, per-piano hours, and the Restoration Handbook and Shop Policies rendered right inside — in English and Spanish, with the training videos embedded where the QR codes used to be. Four and a half thousand reports and counting, and the sheet stays the source of truth. It started life on this very wall as a sketch called Friday Clean Up."},
   {id:"momni", name:"Momni", cat:"Momni", frame:"brass", big:true,
    tag:"caresharing, mom to mom — now in beta", phase:"retouching", pct:90,
    stack:"HTML · beta gate", born:"2026",
@@ -723,7 +723,7 @@ function renderDetail(id){
           <div class="meter"><i style="width:${app.pct}%; background:${p.color}"></i></div>
         </div>
         <div class="d-card">
-          <h3>Put ${app.name} on Your Home Screen</h3>
+          <h3>Put ${app.installName || app.name} on Your Home Screen</h3>
           <div class="install">
             <img class="install-icon" src="${ICONS[app.id] || ""}" alt="${app.name} home screen icon">
             <div>
