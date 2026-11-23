@@ -17,7 +17,7 @@
   --black:#2A2622; --paper:#FFFDF8; --accent:#A64B3C;
   /* phase colors */
   --ph-dreaming:#9B8CD9; --ph-sketching:#E5C17E; --ph-painting:#C77E6D;
-  --ph-retouching:#7FA3C4; --ph-hung:#7FA968; --ph-archived:#A6988A;
+  --ph-retouching:#7FA3C4; --ph-hung:#7FA968; --ph-archived:#A6988A; --ph-retired:#B08A7A;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -315,6 +315,7 @@ body.viewing #detail{display:block}
     <a href="#/p/requested">Requested</a>
     <a href="#/p/queue">The Queue</a>
     <a href="#/p/archived">Archived</a>
+    <a href="#/p/retired">Retired</a>
     <a href="#/p/tally">The Tally</a>
     <a href="#/p/complete">A–Z</a>
     <a href="#/p/request">Request an App</a>
@@ -424,6 +425,31 @@ body.viewing #detail{display:block}
   </div>
 </section>
 
+<!-- ================= RETIRED ================= -->
+<section id="retired" class="section arch pg">
+  <div class="section-head">
+    <h2 class="section-title">Retired</h2>
+    <p class="section-sub">taken down from the wall — finished works that have stepped back from daily use.</p>
+  </div>
+  <div class="wall">
+    <a class="piece" href="#/app/blpops" style="width:270px">
+      <div class="fr black"><img data-shot="blpops-main" alt="BLP Operations screenshot" loading="lazy"></div>
+      <div class="lab"><b>BLP Operations</b><i>33 modules under one roof</i>
+      <span class="badge"><i style="background:var(--ph-retired)"></i>Retired</span></div>
+    </a>
+    <a class="piece" href="#/app/blpshop" style="width:270px">
+      <div class="fr black"><img data-shot="blpshop-main" alt="BLP Piano Shop screenshot" loading="lazy"></div>
+      <div class="lab"><b>BLP Piano Shop</b><i>restoration systems, training and reports</i>
+      <span class="badge"><i style="background:var(--ph-retired)"></i>Retired</span></div>
+    </a>
+    <a class="piece" href="#/app/blpagents" style="width:270px">
+      <div class="fr black"><img data-shot="blpagents-main" alt="BLP Agents screenshot" loading="lazy"></div>
+      <div class="lab"><b>BLP Agents</b><i>mission control for the digital team</i>
+      <span class="badge"><i style="background:var(--ph-retired)"></i>Retired</span></div>
+    </a>
+  </div>
+</section>
+
 <!-- ================= THE TALLY ================= -->
 <section id="tally" class="section pg">
   <div class="section-head">
@@ -434,15 +460,15 @@ body.viewing #detail{display:block}
     <p class="tally-title">the app tally ✿</p>
     <p class="tally-sub">2026 edition</p>
     <ul class="tally-list">
-      <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>7 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>12 ready · 3 retired</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#E4756B"></span><b>Momni</b><span class="tally-dots"></span><span>4 ready</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>3 ready · 1 archived</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>1 ready</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>8 ready · 1 archived</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>3 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>3 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>4 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#A6988A"></span><b>Hobby Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
     </ul>
-    <div class="tally-total"><span>The whole wall</span><span>22 ready · 3 on deck · 2 requested</span></div>
+    <div class="tally-total"><span>The whole wall</span><span>36 ready · 3 on deck · 2 requested</span></div>
   </div>
 </section>
 
@@ -491,7 +517,7 @@ body.viewing #detail{display:block}
 </section>
 
 <footer class="footer">
-  <p class="mast-stats"><b>21</b> ready &amp; in progress · <b>4</b> on deck · <b>2</b> requested · <b>1</b> archived</p>
+  <p class="mast-stats"><b>36</b> ready &amp; in progress · <b>4</b> on deck · <b>2</b> requested · <b>1</b> archived · <b>3</b> retired</p>
   <div class="legend" id="legend" aria-label="Phase legend">
     <span><i style="background:var(--ph-dreaming)"></i>Dreaming</span>
     <span><i style="background:var(--ph-sketching)"></i>Sketching</span>
@@ -499,6 +525,7 @@ body.viewing #detail{display:block}
     <span><i style="background:var(--ph-retouching)"></i>Retouching</span>
     <span><i style="background:var(--ph-hung)"></i>Ready</span>
     <span><i style="background:var(--ph-archived)"></i>Archived</span>
+    <span><i style="background:var(--ph-retired)"></i>Retired</span>
   </div>
   <b>The Gallery</b>
   software by Karmel Larson &amp; team
@@ -529,12 +556,13 @@ const PHASES = {
   retouching: {word:"Retouching", color:"var(--ph-retouching)"},
   hung:       {word:"Ready",      color:"var(--ph-hung)"},
   archived:   {word:"Archived",   color:"var(--ph-archived)"},
+  retired:    {word:"Retired",    color:"var(--ph-retired)"},
 };
 
 /* ============ the collection ============ */
 const APPS = [
   {id:"pianolog", name:"BLP Piano Log", cat:"BLP Apps", frame:"wood", big:true,
-   tag:"the showroom floor, inventoried", phase:"hung", pct:100,
+   tag:"the showroom floor, inventoried", phase:"retouching", pct:70,
    stack:"HTML · Google Sheets sync", born:"2026",
    github:"https://github.com/karmel-spec/pianolog", live:"",
    story:"Every piano at Brigham Larson Pianos, accounted for. Piano Log reads straight from the shop's inventory sheet, so the team can search by make, serial, section, or owner and always trust what they see. It was the first BLP tool to get real branding — and it set the bar for everything after."},
@@ -544,15 +572,15 @@ const APPS = [
    github:"https://github.com/alisablp/interactivemap", live:"https://blpmap.netlify.app",
    story:"Every piano Brigham Larson Pianos has restored and sent home, pinned in gold from coast to coast. Zoom from the whole country down to street level, slide through every era of piano history, and tap any pin for that piano's story — its year, its make, and a link to its page on the shop's site. Pins mark city centers only; names and addresses never leave the log. Built to live on the shop's website, where piano families can find themselves on the map."},
   {id:"salesapp2", name:"BLP Sales Console", cat:"BLP Apps", frame:"brass",
-   tag:"leads logged, follow-ups drafted", phase:"retouching", pct:85,
+   tag:"leads logged, follow-ups drafted", phase:"hung", pct:100,
    stack:"TypeScript · Leads Log sheet · Arnold drafts", born:"2026",
    github:"https://github.com/karmel-spec/salesapp2", live:"",
-   story:"The newest BLP tool: a console where the Leads Log sheet is the source of truth and follow-up drafts are ready before you ask. It's in retouching now — final wiring before it earns its spot on the sales desk."},
-  {id:"blpops", name:"BLP Operations", cat:"BLP Apps", frame:"black",
-   tag:"33 modules under one roof", phase:"retouching", pct:90,
+   story:"The newest BLP tool: a console where the Leads Log sheet is the source of truth and follow-up drafts are ready before you ask. The final wiring is done, and it's earned its spot on the sales desk."},
+  {id:"blpops", name:"BLP Operations", cat:"BLP Apps", frame:"black", retired:true,
+   tag:"33 modules under one roof", phase:"retired", pct:90,
    stack:"HTML · Netlify · Sheets sync", born:"2026",
    github:"https://github.com/karmel-spec/BLPOperationsWebApp", live:"",
-   story:"The mega-app: a sales console plus thirty-three working modules — tuning CRM, marketing, onboarding, org charts, and more — all under one roof. It's the busiest wall in the gallery, and it's getting a careful audit pass right now."},
+   story:"The mega-app: a sales console plus thirty-three working modules — tuning CRM, marketing, onboarding, org charts, and more — all under one roof. It was the busiest wall in the gallery, and it's retired now."},
   {id:"pricetags", name:"BLP Price Tag Maker", cat:"BLP Apps", frame:"wood",
    tag:"print-ready showroom tags", phase:"hung", pct:100,
    stack:"HTML · print CSS · QR codes", born:"2026",
@@ -563,11 +591,51 @@ const APPS = [
    stack:"HTML · Fusion 360 files · training video", born:"2026",
    github:"https://github.com/karmel-spec/BLPResourceLibrary", live:"https://pianotechnologylibrary.com",
    story:"An open rebuilding library for piano technicians everywhere: Fusion 360 models of obsolete parts, shop-built jigs and fixtures, and training video straight from a working restoration shop. Drawn like a drafting table, organized like a card catalog, and free on purpose — download, reproduce, and keep the craft alive."},
-  {id:"blpshop", name:"BLP Piano Shop", cat:"BLP Apps", frame:"black",
-   tag:"restoration systems, training and reports", phase:"retouching", pct:80,
+  {id:"blpshop", name:"BLP Piano Shop", cat:"BLP Apps", frame:"black", retired:true,
+   tag:"restoration systems, training and reports", phase:"retired", pct:80,
    installName:"BLP Piano Shop Webapp", stack:"HTML · Google Sheets sync · EN/ES", born:"2026",
    github:"https://github.com/karmel-spec/BLPShop", live:"https://blpshop.netlify.app",
    story:"Every Friday since 2017, the shop's technicians have written up their week — what got finished, what carries over. BLP Piano Shop turns that ritual into a live app over the very same Google Sheet: a dashboard of who's reported, an assignment planner built from this week's carry-overs, per-piano hours, and the Restoration Handbook and Shop Policies rendered right inside — in English and Spanish, with the training videos embedded where the QR codes used to be. Four and a half thousand reports and counting, and the sheet stays the source of truth. It started life on this very wall as a sketch called Friday Clean Up."},
+  {id:"storemap", name:"BLP Store Map", cat:"BLP Apps", frame:"wood",
+   tag:"every piano, in its place on the floor", phase:"retouching", pct:85,
+   stack:"HTML · Python · Sheets + Calendar sync", born:"2026",
+   github:"https://github.com/karmel-spec/BLPMap", live:"https://blpstoremap.netlify.app",
+   story:"A live floor map of the piano store, drawn to true proportion from the Store Map sheet. Every active piano in the Piano Log lands on its numbered spot, and the moving calendar fills in Today's Moves, the Move Board, and the crew list — so nobody has to walk both floors to find an upright."},
+  {id:"blpcrm", name:"BLP CRM", cat:"BLP Apps", frame:"black", private:true,
+   tag:"every client, call and piano in one place", phase:"painting", pct:60,
+   stack:"Next.js · Supabase", born:"2026",
+   github:"https://github.com/karmel-spec/blpcrm", live:"",
+   story:"The shop's own CRM: clients, leads, pianos, calls, follow-ups and a shared inbox, all under one roof. It's still on the easel — the board and the inbox are taking shape, with reports and segments coming in behind them."},
+  {id:"blpmarketing", name:"BLP Marketing Engine", cat:"BLP Apps", frame:"brass", private:true,
+   tag:"the week's marketing, on one board", phase:"painting", pct:60,
+   stack:"Next.js · TypeScript · Postgres", born:"2026",
+   github:"https://github.com/karmel-spec/blp-marketing", live:"",
+   story:"The marketing desk for the piano shop: Marcus's console, the weekly scorecard, the inventory marketing board, the week board, approvals, and the video pipeline. It's the busiest easel in the studio right now, and it changes almost daily."},
+  {id:"clientportal", name:"BLP Client Portal", cat:"BLP Apps", frame:"wood", private:true,
+   tag:"follow your piano from sale to delivery", phase:"painting", pct:60,
+   stack:"Next.js · TypeScript · Postgres", born:"2026",
+   github:"https://github.com/karmel-spec/blp-client-portal", live:"",
+   story:"A portal for shop-work clients: selections, payments, shop updates and delivery in one place, so a family can follow their piano's restoration or refinishing without having to call and ask. The office runs the queue from the other side."},
+  {id:"tuningacademy", name:"BLP Tuning Academy", cat:"BLP Apps", frame:"brass", private:true,
+   tag:"nine modules, twenty-seven short lessons", phase:"retouching", pct:80,
+   stack:"Next.js · Supabase · EN/ES", born:"2026",
+   github:"https://github.com/karmel-spec/blp-tuning-training", live:"https://blptuningtraining.netlify.app",
+   story:"Video-led piano tuning training from the shop: a pre-test for placement, nine modules of short lessons, quizzes where you retake only what you missed, an illustrated glossary, and a practice-tuning log that reports speed against quality. In English and Spanish."},
+  {id:"admintraining", name:"BLP Admin Training", cat:"BLP Apps", frame:"black", private:true,
+   tag:"curriculum, practice log and scorecard", phase:"retouching", pct:85,
+   stack:"HTML · Google Sheets sync", born:"2026",
+   github:"https://github.com/karmel-spec/blp-admin-training-a30eb", live:"https://blpadmintraining.netlify.app",
+   story:"Everything a new admin at the piano shop needs to learn, laid out as tiers, modules and skills. Each skill climbs a small ladder — learning, practicing, mastered — and a trainer signs off at the top. Built for one new admin, and for every admin after."},
+  {id:"fleetlog", name:"Fleet Log", cat:"BLP Apps", frame:"wood", private:true,
+   tag:"every truck and van, accounted for", phase:"painting", pct:60,
+   stack:"HTML · Google Sheets sync", born:"2026",
+   github:"https://github.com/karmel-spec/fleetlog", live:"",
+   story:"A dashboard over the shop's Fleet Log sheet: every vehicle, with registration and oil-change reminders worked out for you, and flags for anything missing a title or insurance. The spreadsheet stays the source of truth; the app only reads it."},
+  {id:"blpagents", name:"BLP Agents", cat:"BLP Apps", frame:"black", retired:true,
+   tag:"mission control for the digital team", phase:"retired", pct:100,
+   stack:"Next.js · TypeScript · Supabase", born:"2026",
+   github:"https://github.com/karmel-spec/BLPagents", live:"",
+   story:"Mission Control for the piano shop's digital team: the full agent roster by department, live fleet health from heartbeats, and a console page for each agent. It's retired now."},
   {id:"momni", name:"Momni", cat:"Momni", frame:"brass", big:true,
    tag:"caresharing, mom to mom — now in beta", phase:"retouching", pct:90,
    stack:"HTML · beta gate", born:"2026",
@@ -589,7 +657,7 @@ const APPS = [
    github:"https://github.com/karmel-spec/momni-agent-ops-console", live:"",
    story:"Mission control for Team Momni: a private command center for the trained agent roster — 204 agents strong — with communications, a task queue, approvals, and an audit trail, headed for ops.momni.com. Credentials never touch the browser; the roster runs on sanitized metadata only. Painted for the operators, kept behind glass on purpose."},
   {id:"famchores", name:"Family Chores", cat:"Family Apps", frame:"black", big:true,
-   tag:"the command center, v2", phase:"hung", pct:100,
+   tag:"the command center, v2", phase:"retouching", pct:80,
    stack:"Next.js · SQLite · Railway", born:"2026",
    github:"https://github.com/karmel-spec/FamChoresV2", live:"",
    story:"Chores rotate among the kids each day, balanced by time and difficulty, with a parent admin backend and per-child dashboards. Version two of the chore experiment — the one that finally ended the chore wars. Deployed and in daily use."},
@@ -599,10 +667,35 @@ const APPS = [
    github:"https://github.com/karmel-spec/TheMovieClubApp", live:"https://themovieclubapp.com",
    story:"A Father's Day gift for Brigham: the movie club he founded in 2007, hung online at last. The marquee counts down to the next screening with a real ticket to RSVP, the archive holds every film since Le Trou in April 2007 with original posters, and the stats page tallies the club's 456 hours in the dark together. Presenters get their hall of fame, members claim their profiles, and the club roster stays where it belongs — the code is kept private to protect the list."},
   {id:"familopedia", name:"Familopedia", cat:"Family Apps", frame:"wood", private:true,
-   tag:"every person, every story, every generation", phase:"retouching", pct:85,
+   tag:"every person, every story, every generation", phase:"sketching", pct:20,
    stack:"static app · Supabase sync", born:"2026",
    github:"https://github.com/karmel-spec/familopedia", live:"https://familopedia.app",
    story:"The family encyclopedia: a digital canonical life for every member of the Larson–Greene family, laid side by side across the generations. Eleven pedias — people, places, journals, legacy, the tree — in a warm Heirloom Editorial design, syncing to the family archive with a magic link. It hangs behind glass on purpose: the stories inside belong to the family."},
+  {id:"familyhq", name:"Larson Family HQ", cat:"Family Apps", frame:"brass", private:true,
+   tag:"the family command center", phase:"painting", pct:40,
+   stack:"HTML · PWA · Netlify", born:"2026",
+   github:"https://github.com/karmel-spec/larson-family-hq", live:"",
+   story:"An early prototype of a family command center: the newsletter, schedules, chores, meals, kids' dashboards, the library and the movie list, all in one home-screen app. Several of its rooms have since grown into paintings of their own."},
+  {id:"eldermission", name:"Elder Larson Mission", cat:"Family Apps", frame:"wood", private:true,
+   tag:"two years in Louisiana, followed from home", phase:"painting", pct:50,
+   stack:"HTML · Netlify Blobs", born:"2026",
+   github:"https://github.com/karmel-spec/elder-larson-mission", live:"",
+   story:"A family-run site to follow and celebrate a two-year mission in Louisiana — for him on P-day, and for everyone at home on the days in between. Started the week he entered the MTC."},
+  {id:"sisterabigail", name:"Sister Abigail Larson", cat:"Family Apps", frame:"brass", private:true,
+   tag:"eighteen months in Georgia, kept", phase:"retouching", pct:85,
+   stack:"HTML · Leaflet map · print book", born:"2026",
+   github:"https://github.com/karmel-spec/sisterabigaillarson", live:"",
+   story:"A keepsake site for eighteen months in the Georgia Atlanta Mission, built for the family after she came home: every weekly letter with its photos, a map and timeline of each area and companion, and a one-click print book."},
+  {id:"birthofmyles", name:"The Birth of Myles", cat:"Family Apps", frame:"wood",
+   tag:"a birth story, bound as a book", phase:"retouching", pct:85,
+   stack:"HTML · Netlify Blobs · print-ready", born:"2026",
+   github:"https://github.com/karmel-spec/myles", live:"",
+   story:"A keepsake book of a grandson's birth story, as his grandma wrote it down, with room for the chapters that come after. One page that reads like an app on a phone and prints as a photo book."},
+  {id:"greenebinder", name:"Greene Family Binder", cat:"Family Apps", frame:"black",
+   tag:"the family binder, kept current", phase:"painting", pct:40,
+   stack:"Next.js · Supabase", born:"2026",
+   github:"https://github.com/karmel-spec/riana", live:"",
+   story:"A private, role-based home for the Greene family's important papers and its history, with Riana — the family's AI assistant — proposing updates through an approval queue. The foundation and first screens are done; it runs on sample data for now."},
   {id:"starlar", name:"Starlar", cat:"Finance Apps", frame:"brass", private:true,
    tag:"the family book, kept private", phase:"hung", pct:100,
    stack:"Next.js · private repo", born:"2026",
@@ -613,11 +706,26 @@ const APPS = [
    stack:"HTML · Netlify Blobs · family password", born:"2026",
    github:"https://github.com/karmel-spec/personalfinance", live:"https://larson-family-finance.netlify.app",
    story:"One place for the family books: a banker-ready financial statement with monthly snapshots, a QuickBooks-style register built from bank CSV imports, Profit First envelopes mapped to real accounts, a kid ledger for who's owed what, and reports printed for family council. Signed in by exactly two Google accounts — everyone else sees the gate."},
+  {id:"financecodex", name:"Personal Finance Codex", cat:"Finance Apps", frame:"wood",
+   tag:"a blank canvas, for now", phase:"dreaming", pct:5,
+   stack:"to be decided", born:"2026",
+   github:"https://github.com/karmel-spec/personalfinancecodex", live:"",
+   story:"A stretched canvas with nothing on it yet — the repository exists, and the painting hasn't started."},
   {id:"lightenup", name:"LightenUP", cat:"Personal Apps", frame:"brass",
    tag:"the lighter path, tracked kindly", phase:"hung", pct:100,
    stack:"single-file HTML · prism branding", born:"2026",
    github:"https://github.com/karmel-spec/lightenup", live:"",
    story:"A weight-cut tracker with guardrails built in on purpose — safety caps, steady pace, kind numbers. One single file, prism-bright, made for the long game rather than the crash."},
+  {id:"tandem", name:"Tandem", cat:"Personal Apps", frame:"black", private:true,
+   tag:"two people, one health log", phase:"painting", pct:60,
+   stack:"HTML · Supabase", born:"2026",
+   github:"https://github.com/karmel-spec/tandem", live:"",
+   story:"A two-person health app: daily calories and macros, a shared fast, morning weigh-ins, side-by-side charts, streaks with one grace day a week, lifting records, and a small feed for cheers and non-scale wins."},
+  {id:"fitnessapp", name:"Fitness App", cat:"Personal Apps", frame:"wood",
+   tag:"a blank canvas, for now", phase:"dreaming", pct:5,
+   stack:"to be decided", born:"2026",
+   github:"https://github.com/karmel-spec/FitnessApp", live:"",
+   story:"A stretched canvas with nothing on it yet — the repository exists, and the painting hasn't started."},
   {id:"babyshower", name:"The Story Garden", cat:"Project Apps", frame:"wood",
    tag:"for Baby White, arriving October 14", phase:"hung", pct:100,
    stack:"HTML · multi-page storybook", born:"2026",
@@ -628,6 +736,16 @@ const APPS = [
    stack:"single-file HTML · Netlify Forms", born:"2026",
    github:"https://github.com/karmel-spec/webappcollections", live:"https://webappgallery.com",
    story:"The room you are standing in. Every app on these walls gets a frame, a story, real screenshots, and a feedback form of its own — plus the queue of what gets painted next. One self-contained page, screenshots embedded, rebuilt from a template whenever a new piece is hung. Yes, it has now been hung inside itself."},
+  {id:"corpuscounsel", name:"Corpus Counsel", cat:"Project Apps", frame:"black", private:true,
+   tag:"a research vault, made browsable", phase:"painting", pct:60,
+   stack:"Node · static snapshot · Netlify", born:"2026",
+   github:"https://github.com/karmel-spec/polyapp", live:"",
+   story:"A read-only web app over a research vault on polygamy — wiki pages, episodes and video transcripts, exported as a snapshot you can browse and search."},
+  {id:"postpartum", name:"Postpartum", cat:"Project Apps", frame:"brass", private:true,
+   tag:"a blank canvas, for now", phase:"dreaming", pct:5,
+   stack:"to be decided", born:"2026",
+   github:"https://github.com/karmel-spec/postpartum", live:"",
+   story:"A stretched canvas with nothing on it yet — the repository exists, and the painting hasn't started."},
   {id:"greenhouse", name:"Garden OS", cat:"Hobby Apps", frame:"black", big:true,
    tag:"the greenhouse brain, growing", phase:"retouching", pct:80,
    stack:"Next.js · Supabase · Netlify", born:"2026",
@@ -650,27 +768,32 @@ const CATS = ["BLP Apps","Momni","Family Apps","Finance Apps","Personal Apps","P
 /* ============ render: walls ============ */
 function badge(app){
   const p = PHASES[app.phase];
-  const pct = app.phase === "hung" ? "100%" : app.phase === "archived" ? "" : app.pct + "%";
+  const pct = app.phase === "hung" ? "100%" : (app.phase === "archived" || app.phase === "retired") ? "" : app.pct + "%";
   return `<span class="badge"><i style="background:${p.color}"></i>${p.word}${pct ? " · " + pct : ""}</span>`;
 }
 function pieceHTML(app){
   return `<a class="piece" href="#/app/${app.id}">
-    <div class="fr ${app.frame}"><img data-shot="${app.id}-main" alt="${app.name} screenshot" loading="lazy"></div>
+    <div class="fr ${app.frame}">${SCREENS[app.id + "-main"]
+      ? `<img data-shot="${app.id}-main" alt="${app.name} screenshot" loading="lazy">`
+      : `<div class="blank-canvas"><span>portrait still to come</span></div>`}</div>
     <div class="lab"><b>${app.name}</b><i>${app.tag}</i>${badge(app)}</div>
   </a>`;
 }
 function catSlug(cat){ return cat.replace(" Apps","").toLowerCase(); }
 function renderWalls(){
   const host = document.getElementById("walls");
-  const cats = CATS.filter(cat => APPS.some(a => a.cat === cat && !a.archived));
+  const cats = CATS.filter(cat => APPS.some(a => a.cat === cat && !a.archived && !a.retired));
   const catbar = `<div class="catbar">${cats.map(cat =>
-    `<button class="catbtn" data-cat="${catSlug(cat)}">${cat.replace(" Apps","")}</button>`).join("")}</div>`;
+    `<button class="catbtn" data-cat="${catSlug(cat)}">${cat.replace(" Apps","")}</button>`).join("")}${
+    APPS.some(a => a.retired) ? `<button class="catbtn" data-page="retired">Retired</button>` : ""}</div>`;
   host.innerHTML = catbar + cats.map(cat => {
-    const pieces = APPS.filter(a => a.cat === cat && !a.archived);
+    const pieces = APPS.filter(a => a.cat === cat && !a.archived && !a.retired);
     return `<div class="plaque" id="cat-${catSlug(cat)}">${cat}</div><div class="wall">${pieces.map(pieceHTML).join("")}</div>`;
   }).join("");
-  host.querySelectorAll(".catbtn").forEach(b => b.addEventListener("click", () =>
-    document.getElementById("cat-" + b.dataset.cat)?.scrollIntoView({behavior:"smooth", block:"start"})));
+  host.querySelectorAll(".catbtn").forEach(b => b.addEventListener("click", () => {
+    if(b.dataset.page){ location.hash = "#/p/" + b.dataset.page; return; }
+    document.getElementById("cat-" + b.dataset.cat)?.scrollIntoView({behavior:"smooth", block:"start"});
+  }));
 }
 
 /* ============ render: a–z ============ */
@@ -706,11 +829,13 @@ function renderDetail(id){
         <button class="share-btn" id="share-btn">Share This App ↗</button>
       </div>
       ${!app.live && !app.private ? `<p class="d-tag" style="font-size:13px; margin-top:12px">not yet hung online — the code lives on GitHub below</p>` : ""}
-      ${app.private && !app.live ? `<p class="d-tag" style="font-size:13px; margin-top:12px">kept behind glass — this piece is private to the family</p>` : ""}
+      ${app.private && !app.live ? `<p class="d-tag" style="font-size:13px; margin-top:12px">kept behind glass — this piece is private to the ${app.cat === "BLP Apps" ? "shop" : "family"}</p>` : ""}
     </header>
     <div class="d-body">
       <div class="d-gallery">
-        <div class="d-mainfr"><img id="d-mainimg" src="${SCREENS[shots[0]] || ""}" alt="${app.name} — main view"></div>
+        <div class="d-mainfr">${shots.length
+          ? `<img id="d-mainimg" src="${SCREENS[shots[0]]}" alt="${app.name} — main view">`
+          : `<div class="blank-canvas"><span>portrait still to come</span></div>`}</div>
         <div class="d-thumbs">
           ${shots.map((k,i) => `<span class="d-thumb${i===0?" active":""}" data-k="${k}" role="button" tabindex="0" aria-label="View screenshot ${i+1}">
             <img src="${SCREENS[k] || ""}" alt=""></span>`).join("")}
@@ -719,13 +844,13 @@ function renderDetail(id){
       <div class="d-side">
         <div class="d-card">
           <h3>Where It Stands</h3>
-          <div class="d-phase-row">${badge(app)}<span class="d-pct">${app.phase==="archived" ? "—" : app.pct + "%"}</span></div>
+          <div class="d-phase-row">${badge(app)}<span class="d-pct">${(app.phase==="archived" || app.phase==="retired") ? "—" : app.pct + "%"}</span></div>
           <div class="meter"><i style="width:${app.pct}%; background:${p.color}"></i></div>
         </div>
         <div class="d-card">
           <h3>Put ${app.installName || app.name} on Your Home Screen</h3>
           <div class="install">
-            <img class="install-icon" src="${ICONS[app.id] || ""}" alt="${app.name} home screen icon">
+            ${ICONS[app.id] ? `<img class="install-icon" src="${ICONS[app.id]}" alt="${app.name} home screen icon">` : ""}
             <div>
               <ol>
                 <li>Open the app in <b>Safari</b> on your iPhone</li>
@@ -873,7 +998,7 @@ function ajaxify(form, successMsg){
 }
 
 /* ============ router ============ */
-const PAGES = ["collection","ondeck","requested","queue","archived","tally","complete","request"];
+const PAGES = ["collection","ondeck","requested","queue","archived","retired","tally","complete","request"];
 function route(){
   const app = location.hash.match(/^#\/app\/([a-z0-9]+)$/);
   if(app){ document.body.classList.add("viewing"); renderDetail(app[1]); return; }
