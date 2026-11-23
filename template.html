@@ -447,6 +447,11 @@ body.viewing #detail{display:block}
       <div class="lab"><b>BLP Agents</b><i>mission control for the digital team</i>
       <span class="badge"><i style="background:var(--ph-retired)"></i>Retired</span></div>
     </a>
+    <a class="piece" href="#/app/babyshower" style="width:270px">
+      <div class="fr wood"><img data-shot="babyshower-main" alt="The Story Garden screenshot" loading="lazy"></div>
+      <div class="lab"><b>The Story Garden</b><i>for Baby White, arriving October 14</i>
+      <span class="badge"><i style="background:var(--ph-retired)"></i>Retired</span></div>
+    </a>
   </div>
 </section>
 
@@ -463,12 +468,12 @@ body.viewing #detail{display:block}
       <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>12 ready · 3 retired</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#E4756B"></span><b>Momni</b><span class="tally-dots"></span><span>4 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>8 ready · 1 archived</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>3 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>3 ready</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>4 ready</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>1 ready · 1 retired</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#A6988A"></span><b>Hobby Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
     </ul>
-    <div class="tally-total"><span>The whole wall</span><span>36 ready · 3 on deck · 2 requested</span></div>
+    <div class="tally-total"><span>The whole wall</span><span>32 ready · 3 on deck · 2 requested</span></div>
   </div>
 </section>
 
@@ -517,7 +522,7 @@ body.viewing #detail{display:block}
 </section>
 
 <footer class="footer">
-  <p class="mast-stats"><b>36</b> ready &amp; in progress · <b>4</b> on deck · <b>2</b> requested · <b>1</b> archived · <b>3</b> retired</p>
+  <p class="mast-stats"><b>32</b> ready &amp; in progress · <b>4</b> on deck · <b>2</b> requested · <b>1</b> archived · <b>4</b> retired</p>
   <div class="legend" id="legend" aria-label="Phase legend">
     <span><i style="background:var(--ph-dreaming)"></i>Dreaming</span>
     <span><i style="background:var(--ph-sketching)"></i>Sketching</span>
@@ -706,11 +711,6 @@ const APPS = [
    stack:"HTML · Netlify Blobs · family password", born:"2026",
    github:"https://github.com/karmel-spec/personalfinance", live:"https://larson-family-finance.netlify.app",
    story:"One place for the family books: a banker-ready financial statement with monthly snapshots, a QuickBooks-style register built from bank CSV imports, Profit First envelopes mapped to real accounts, a kid ledger for who's owed what, and reports printed for family council. Signed in by exactly two Google accounts — everyone else sees the gate."},
-  {id:"financecodex", name:"Personal Finance Codex", cat:"Finance Apps", frame:"wood",
-   tag:"a blank canvas, for now", phase:"dreaming", pct:5,
-   stack:"to be decided", born:"2026",
-   github:"https://github.com/karmel-spec/personalfinancecodex", live:"",
-   story:"A stretched canvas with nothing on it yet — the repository exists, and the painting hasn't started."},
   {id:"lightenup", name:"LightenUP", cat:"Personal Apps", frame:"brass",
    tag:"the lighter path, tracked kindly", phase:"sketching", pct:30,
    stack:"single-file HTML · prism branding", born:"2026",
@@ -726,8 +726,8 @@ const APPS = [
    stack:"to be decided", born:"2026",
    github:"https://github.com/karmel-spec/FitnessApp", live:"",
    story:"A stretched canvas with nothing on it yet — the repository exists, and the painting hasn't started."},
-  {id:"babyshower", name:"The Story Garden", cat:"Project Apps", frame:"wood",
-   tag:"for Baby White, arriving October 14", phase:"hung", pct:100,
+  {id:"babyshower", name:"The Story Garden", cat:"Project Apps", frame:"wood", retired:true,
+   tag:"for Baby White, arriving October 14", phase:"retired", pct:100,
    stack:"HTML · multi-page storybook", born:"2026",
    github:"https://github.com/karmel-spec/myleswhitebabyshower", live:"https://babywhiteshower.netlify.app",
    story:"A baby shower as a storybook: blue gingham, terracotta pots, string lights at dusk, and a library that grows one gift at a time. Each chapter is its own page — the particulars, the story so far, the growing tracker, the games. Shower's August 15th, in Grandma's garden."},
@@ -736,16 +736,6 @@ const APPS = [
    stack:"single-file HTML · Netlify Forms", born:"2026",
    github:"https://github.com/karmel-spec/webappcollections", live:"https://webappgallery.com",
    story:"The room you are standing in. Every app on these walls gets a frame, a story, real screenshots, and a feedback form of its own — plus the queue of what gets painted next. One self-contained page, screenshots embedded, rebuilt from a template whenever a new piece is hung. Yes, it has now been hung inside itself."},
-  {id:"corpuscounsel", name:"Corpus Counsel", cat:"Project Apps", frame:"black", private:true,
-   tag:"a research vault, made browsable", phase:"painting", pct:60,
-   stack:"Node · static snapshot · Netlify", born:"2026",
-   github:"https://github.com/karmel-spec/polyapp", live:"",
-   story:"A read-only web app over a research vault on polygamy — wiki pages, episodes and video transcripts, exported as a snapshot you can browse and search."},
-  {id:"postpartum", name:"Postpartum", cat:"Project Apps", frame:"brass", private:true,
-   tag:"a blank canvas, for now", phase:"dreaming", pct:5,
-   stack:"to be decided", born:"2026",
-   github:"https://github.com/karmel-spec/postpartum", live:"",
-   story:"A stretched canvas with nothing on it yet — the repository exists, and the painting hasn't started."},
   {id:"greenhouse", name:"Garden OS", cat:"Hobby Apps", frame:"black", big:true,
    tag:"the greenhouse brain, growing", phase:"hung", pct:100,
    stack:"Next.js · Supabase · Netlify", born:"2026",
