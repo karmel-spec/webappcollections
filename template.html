@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Gallery — a collection of webapps by Karmel Larson &amp; team</title>
-<meta name="description" content="The complete collection of webapps built by Karmel Larson — for the piano shop, Momni, the family, the garden, and everything in between. Browse the walls, peek at what's on deck, and request an app of your own.">
+<meta name="description" content="The complete collection of webapps built by Karmel Larson — for the piano shop, Momni, the family, the garden, and everything in between. Browse the walls, and leave a note on any piece.">
 <link rel="apple-touch-icon" href="assets/icons/gallery.png">
 <link rel="icon" type="image/png" href="assets/icons/gallery.png">
 <style>
@@ -311,12 +311,9 @@ body.viewing #detail{display:block}
   <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">☰ Menu</button>
   <div class="nav-links" id="nav-links">
     <a href="#/p/collection">The Collection</a>
-    <a href="#/p/ondeck">On Deck</a>
-    <a href="#/p/queue">The Queue</a>
     <a href="#/p/retired">Retired</a>
     <a href="#/p/tally">The Tally</a>
     <a href="#/p/complete">A–Z</a>
-    <a href="#/p/request">Request an App</a>
   </div>
 </nav>
 
@@ -324,63 +321,6 @@ body.viewing #detail{display:block}
   <!-- walls are rendered by JS from APPS data -->
   <div id="walls"></div>
 </main>
-
-<!-- ================= ON DECK ================= -->
-<section id="ondeck" class="tinted pg">
-  <div class="section" style="padding-top:38px">
-    <div class="section-head">
-      <h2 class="section-title">On Deck — The App Planner</h2>
-      <p class="section-sub">next webapps — sketched, queued, and waiting for the easel.</p>
-    </div>
-  </div>
-  <div class="sketch-wall">
-    <div class="sketch">
-      <span style="text-align:center"><span class="queue-chip">Queue #1</span></span>
-      <div class="sk-fr"><div class="sk-canvas">
-        <span class="sk-name">BLP Team Weekly Scheduler</span>
-        <span class="sk-what">who's on, when, at the shop</span>
-        <span class="badge"><i style="background:var(--ph-dreaming)"></i>5%</span>
-      </div></div>
-      <p class="sk-lab">next on the easel</p>
-    </div>
-    <div class="sketch">
-      <span style="text-align:center"><span class="queue-chip">Queue #2</span></span>
-      <div class="sk-fr"><div class="sk-canvas">
-        <span class="sk-name">Brielle's Notes &amp; Agent Charity</span>
-        <span class="sk-what">notes &amp; a helping-hands agent</span>
-        <span class="badge"><i style="background:var(--ph-dreaming)"></i>5%</span>
-      </div></div>
-      <p class="sk-lab">penciled in</p>
-    </div>
-    <div class="sketch">
-      <span style="text-align:center"><span class="queue-chip">Queue #3</span></span>
-      <div class="sk-fr"><div class="sk-canvas">
-        <span class="sk-name">Home Assistant WebApp</span>
-        <span class="sk-what">the house, at your command</span>
-        <span class="badge"><i style="background:var(--ph-dreaming)"></i>5%</span>
-      </div></div>
-      <p class="sk-lab">penciled in</p>
-    </div>
-  </div>
-</section>
-
-
-<!-- ================= THE QUEUE ================= -->
-<section id="queue" class="section pg">
-  <div class="section-head">
-    <h2 class="section-title">The Queue</h2>
-    <p class="section-sub">what gets painted next, in order. request a spot — and say where you'd like to land.</p>
-  </div>
-  <ol class="queue-list">
-    <li class="queue-row"><span class="queue-num">1</span><div><b>BLP Team Weekly Scheduler</b><i>who's on, when, at the shop</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>5%</span></li>
-    <li class="queue-row"><span class="queue-num">2</span><div><b>Brielle's Notes &amp; Agent Charity</b><i>notes &amp; a helping-hands agent</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>5%</span></li>
-    <li class="queue-row"><span class="queue-num">3</span><div><b>Home Assistant WebApp</b><i>the house, at your command</i></div><span class="badge"><i style="background:var(--ph-dreaming)"></i>5%</span></li>
-    <li class="queue-row"><span class="queue-num">4</span><div><b>Practice Tracker</b><i>requested by a piano parent</i></div></li>
-    <li class="queue-row"><span class="queue-num">5</span><div><b>Book Swap</b><i>requested by a neighbor</i></div></li>
-  </ol>
-  <p class="queue-note">Five in line today. When you <a href="#/p/request">request an app</a>, tell me where you hope it lands — front of the line, "whenever," or somewhere in between — and I'll do my honest best.</p>
-</section>
-
 
 <!-- ================= RETIRED ================= -->
 <section id="retired" class="section arch pg">
@@ -435,7 +375,7 @@ body.viewing #detail{display:block}
       <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>1 retired</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#A6988A"></span><b>Hobby Apps</b><span class="tally-dots"></span><span>4 ready</span></li>
     </ul>
-    <div class="tally-total"><span>The whole wall</span><span>31 ready · 3 on deck · 2 requested</span></div>
+    <div class="tally-total"><span>The whole wall</span><span>31 ready</span></div>
   </div>
 </section>
 
@@ -449,42 +389,8 @@ body.viewing #detail{display:block}
   <div class="az-wrap"><div class="az-grid" id="azgrid"></div></div>
 </section>
 
-<!-- ================= REQUEST AN APP ================= -->
-<section id="request" class="formwrap pg">
-  <div class="form-card">
-    <p class="form-orn">❧</p>
-    <h2 class="form-title">Request an App</h2>
-    <p class="form-copy">Wish an app existed for your shop, your family, or your thing? Share the vision — the best requests get a sticky note on the studio wall and a spot in the queue.</p>
-    <form name="app-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks/">
-      <input type="hidden" name="form-name" value="app-request">
-      <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
-      <div class="field-row">
-        <div class="field"><label for="rq-name">Your name</label><input id="rq-name" name="name" required></div>
-        <div class="field"><label for="rq-email">Email</label><input id="rq-email" name="email" type="email" required></div>
-      </div>
-      <div class="field"><label for="rq-app">What should it be called?</label><input id="rq-app" name="app-name" placeholder="e.g. Practice Tracker"></div>
-      <div class="field"><label for="rq-vision">Share your vision</label><textarea id="rq-vision" name="vision" required placeholder="What should it do? Who is it for? What would make it wonderful?"></textarea></div>
-      <div class="field-row">
-        <div class="field"><label for="rq-cat">Category</label>
-          <select id="rq-cat" name="category">
-            <option>Family</option><option>Personal</option><option>Finance</option>
-            <option>Hobby</option><option>Project</option><option>Business</option><option>Other</option>
-          </select>
-        </div>
-        <div class="field"><label for="rq-queue">Where in the queue?</label>
-          <select id="rq-queue" name="queue-hope">
-            <option>Whenever you get to it</option><option>Sometime this year</option>
-            <option>Next few months</option><option>Front of the line, please!</option>
-          </select>
-        </div>
-      </div>
-      <div style="text-align:center; margin-top:8px"><button class="btn" type="submit">Pin It to the Wall</button></div>
-    </form>
-  </div>
-</section>
-
 <footer class="footer">
-  <p class="mast-stats"><b>31</b> ready &amp; in progress · <b>4</b> on deck · <b>2</b> requested · <b>5</b> retired</p>
+  <p class="mast-stats"><b>31</b> ready &amp; in progress · <b>5</b> retired</p>
   <div class="legend" id="legend" aria-label="Legend">
     <span><i style="background:var(--ph-retired)"></i>Retired</span>
   </div>
@@ -686,7 +592,7 @@ const APPS = [
    tag:"the collection, collected", phase:"hung", pct:100,
    stack:"single-file HTML · Netlify Forms", born:"2026",
    github:"https://github.com/karmel-spec/webappcollections", live:"https://webappgallery.com",
-   story:"The room you are standing in. Every app on these walls gets a frame, a story, real screenshots, and a feedback form of its own — plus the queue of what gets painted next. One self-contained page, screenshots embedded, rebuilt from a template whenever a new piece is hung. Yes, it has now been hung inside itself."},
+   story:"The room you are standing in. Every app on these walls gets a frame, a story, real screenshots, and a feedback form of its own. One self-contained page, screenshots embedded, rebuilt from a template whenever a new piece is hung. Yes, it has now been hung inside itself."},
   {id:"greenhouse", name:"Garden OS", cat:"Hobby Apps", frame:"black", big:true,
    tag:"the greenhouse brain, growing", phase:"hung", pct:100,
    stack:"Next.js · Supabase · Netlify", born:"2026",
@@ -940,7 +846,7 @@ function ajaxify(form, successMsg){
 }
 
 /* ============ router ============ */
-const PAGES = ["collection","ondeck","queue","retired","tally","complete","request"];
+const PAGES = ["collection","retired","tally","complete"];
 function route(){
   const app = location.hash.match(/^#\/app\/([a-z0-9]+)$/);
   if(app){ document.body.classList.add("viewing"); renderDetail(app[1]); return; }
@@ -966,8 +872,6 @@ navToggle?.addEventListener("click", () => {
 /* ============ boot ============ */
 renderWalls();
 renderAZ();
-ajaxify(document.querySelector('#request form[name="app-request"]'),
-  "Pinned to the studio wall — thank you!");
 document.querySelectorAll("img[data-shot]").forEach(img => {
   const k = img.dataset.shot;
   if(SCREENS[k]) img.src = SCREENS[k];
