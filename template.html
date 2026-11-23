@@ -314,7 +314,6 @@ body.viewing #detail{display:block}
     <a href="#/p/ondeck">On Deck</a>
     <a href="#/p/requested">Requested</a>
     <a href="#/p/queue">The Queue</a>
-    <a href="#/p/archived">Archived</a>
     <a href="#/p/retired">Retired</a>
     <a href="#/p/tally">The Tally</a>
     <a href="#/p/complete">A–Z</a>
@@ -410,21 +409,6 @@ body.viewing #detail{display:block}
 </section>
 
 
-<!-- ================= ARCHIVED ================= -->
-<section id="archived" class="section arch pg">
-  <div class="section-head">
-    <h2 class="section-title">The Archive</h2>
-    <p class="section-sub">retired with honor — early works whose lessons live on in newer apps.</p>
-  </div>
-  <div class="wall">
-    <a class="piece" href="#/app/choreapp" style="width:270px">
-      <div class="fr wood"><img data-shot="choreapp-main" alt="Teamwork Chores screenshot" loading="lazy"></div>
-      <div class="lab"><b>Teamwork Chores</b><i>the original chore app — superseded by v2</i>
-      <span class="badge"><i style="background:var(--ph-archived)"></i>Archived</span></div>
-    </a>
-  </div>
-</section>
-
 <!-- ================= RETIRED ================= -->
 <section id="retired" class="section arch pg">
   <div class="section-head">
@@ -452,6 +436,11 @@ body.viewing #detail{display:block}
       <div class="lab"><b>The Story Garden</b><i>Baby Shower for Myles White, born October 10, 2026</i>
       <span class="badge"><i style="background:var(--ph-retired)"></i>Retired</span></div>
     </a>
+    <a class="piece" href="#/app/choreapp" style="width:270px">
+      <div class="fr wood"><img data-shot="choreapp-main" alt="Teamwork Chores screenshot" loading="lazy"></div>
+      <div class="lab"><b>Teamwork Chores</b><i>the original — retired with honor</i>
+      <span class="badge"><i style="background:var(--ph-retired)"></i>Retired</span></div>
+    </a>
   </div>
 </section>
 
@@ -467,7 +456,7 @@ body.viewing #detail{display:block}
     <ul class="tally-list">
       <li class="tally-row"><span class="tally-swash" style="background:#E5C17E"></span><b>BLP Apps</b><span class="tally-dots"></span><span>11 ready · 3 retired</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#E4756B"></span><b>Momni</b><span class="tally-dots"></span><span>4 ready</span></li>
-      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>7 ready · 1 archived</span></li>
+      <li class="tally-row"><span class="tally-swash" style="background:#F4B41A"></span><b>Family Apps</b><span class="tally-dots"></span><span>7 ready · 1 retired</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#7FA968"></span><b>Finance Apps</b><span class="tally-dots"></span><span>2 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#9B8CD9"></span><b>Personal Apps</b><span class="tally-dots"></span><span>3 ready</span></li>
       <li class="tally-row"><span class="tally-swash" style="background:#8FB6D9"></span><b>Project Apps</b><span class="tally-dots"></span><span>1 retired</span></li>
@@ -522,9 +511,8 @@ body.viewing #detail{display:block}
 </section>
 
 <footer class="footer">
-  <p class="mast-stats"><b>31</b> ready &amp; in progress · <b>4</b> on deck · <b>2</b> requested · <b>1</b> archived · <b>4</b> retired</p>
+  <p class="mast-stats"><b>31</b> ready &amp; in progress · <b>4</b> on deck · <b>2</b> requested · <b>5</b> retired</p>
   <div class="legend" id="legend" aria-label="Legend">
-    <span><i style="background:var(--ph-archived)"></i>Archived</span>
     <span><i style="background:var(--ph-retired)"></i>Retired</span>
   </div>
   <b>The Gallery</b>
@@ -736,8 +724,8 @@ const APPS = [
    stack:"HTML · garage-poster style", born:"2026",
    github:"https://github.com/karmel-spec/tamedog", live:"https://tamedog.netlify.app",
    story:"Music, shows, merch, and a photo gallery in full Garage Poster style — loud on purpose. The launch checklist is nearly done; then the amps go up."},
-  {id:"choreapp", name:"Teamwork Chores", cat:"Family Apps", frame:"wood", archived:true,
-   tag:"the original — retired with honor", phase:"archived", pct:100,
+  {id:"choreapp", name:"Teamwork Chores", cat:"Family Apps", frame:"wood", retired:true,
+   tag:"the original — retired with honor", phase:"retired", pct:100,
    stack:"HTML prototype · Netlify", born:"2026",
    github:"https://github.com/karmel-spec/ChoreApp", live:"",
    story:"The first swing at the chore problem: a responsive static prototype with dashboards, design studies, and a beta-testing guide. Everything learned here became Family Chores v2 — which is exactly what a good first version is for."},
@@ -979,7 +967,7 @@ function ajaxify(form, successMsg){
 }
 
 /* ============ router ============ */
-const PAGES = ["collection","ondeck","requested","queue","archived","retired","tally","complete","request"];
+const PAGES = ["collection","ondeck","requested","queue","retired","tally","complete","request"];
 function route(){
   const app = location.hash.match(/^#\/app\/([a-z0-9]+)$/);
   if(app){ document.body.classList.add("viewing"); renderDetail(app[1]); return; }
