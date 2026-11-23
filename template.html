@@ -312,7 +312,6 @@ body.viewing #detail{display:block}
   <div class="nav-links" id="nav-links">
     <a href="#/p/collection">The Collection</a>
     <a href="#/p/ondeck">On Deck</a>
-    <a href="#/p/requested">Requested</a>
     <a href="#/p/queue">The Queue</a>
     <a href="#/p/retired">Retired</a>
     <a href="#/p/tally">The Tally</a>
@@ -365,32 +364,6 @@ body.viewing #detail{display:block}
   </div>
 </section>
 
-<!-- ================= REQUESTED ================= -->
-<section id="requested" class="section pg">
-  <div class="section-head">
-    <h2 class="section-title">Requested</h2>
-    <p class="section-sub">other people's wishes, pinned to the studio wall — add yours below.</p>
-  </div>
-  <!-- EDIT ME: sample requests — real ones arrive via the form -->
-  <div class="sketch-wall">
-    <div class="sketch">
-      <span style="text-align:center"><span class="queue-chip">Queue #4</span></span>
-      <div class="note-card">
-        <span class="sk-name" style="font-size:19px">Practice Tracker</span>
-        <p class="sk-what" style="margin:6px 0 0">stickers &amp; streaks for piano practice minutes</p>
-        <p class="note-from">requested by a piano parent</p>
-      </div>
-    </div>
-    <div class="sketch">
-      <span style="text-align:center"><span class="queue-chip">Queue #5</span></span>
-      <div class="note-card">
-        <span class="sk-name" style="font-size:19px">Book Swap</span>
-        <p class="sk-what" style="margin:6px 0 0">a neighborhood lending library, online</p>
-        <p class="note-from">requested by a neighbor</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ================= THE QUEUE ================= -->
 <section id="queue" class="section pg">
@@ -967,7 +940,7 @@ function ajaxify(form, successMsg){
 }
 
 /* ============ router ============ */
-const PAGES = ["collection","ondeck","requested","queue","retired","tally","complete","request"];
+const PAGES = ["collection","ondeck","queue","retired","tally","complete","request"];
 function route(){
   const app = location.hash.match(/^#\/app\/([a-z0-9]+)$/);
   if(app){ document.body.classList.add("viewing"); renderDetail(app[1]); return; }
